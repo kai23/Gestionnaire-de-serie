@@ -1,14 +1,11 @@
 package controlleur;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class SerieController {
 
-	private int dircount;
-	private int filecount;
+	ArrayList<String> listeFichier = new ArrayList<>();
 
 	/**
 	 * @param args
@@ -17,21 +14,26 @@ public class SerieController {
 	public ArrayList<String> listDirectory(String dir) {
 		File file = new File(dir);
 		File[] files = file.listFiles();
-		ArrayList<String> listeFichier = new ArrayList<>();
+		
 
 		// On récupère la liste de fichiers dans l'arraylist
 		if (files != null) {
 			for (int i = 0; i < files.length; i++) {
-				// String fichier = files[i].toString();
-				// String ext = fichier.substring(fichier.lastIndexOf("."));
+				
+				// On vérifie si c'est pas un repertoire
 				if (files[i].isDirectory() == false) {
-					listeFichier.add(files[i].toString());
+					listeFichier.add(files[i].getName());
 				}
+				
+				// Si c'en est un, alors on relance la fonction pour chercher récursivement
 				if (files[i].isDirectory() == true) {
 					this.listDirectory(files[i].getAbsolutePath());
 				}
 			}
 		}
+		
+
+		
 		return listeFichier;
 
 	}
