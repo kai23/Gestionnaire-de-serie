@@ -43,7 +43,21 @@ public class Serie {
 	 * Methods
 	 */
 	public boolean addSeason(Season season) {
-		return seasons.add(season);
+		if (getSeason(season.getNum()) == null)
+			return seasons.add(season);
+		else
+			return false;
 	}
-
+	public Season getSeason(int num) {
+		Iterator<Season> it = seasons.iterator();
+		while (it.hasNext()) {
+			Season season = it.next();
+			if (season.getNum() == num)
+				return season;
+		}
+		return null;
+	}
+	public void deleteSeason(Season season) {
+		seasons.remove(season);
+	}
 }
