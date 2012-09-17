@@ -44,22 +44,20 @@ public class Serie {
 	/**
 	 * Methods
 	 */
-	public boolean addSeason(Season season)
-		throws SeasonExistsException {
+	public boolean addSeason(Season season) {
 		if (getSeason(season.getNum()) != null)
-			throw new SeasonExistsException(season.getNum());
+			return false;
 		return seasons.add(season);
 			
 	}
-	public Season getSeason(int num)
-	throws SeasonNotExistsException {
+	public Season getSeason(int num) {
 		Iterator<Season> it = seasons.iterator();
 		while (it.hasNext()) {
 			Season season = it.next();
 			if (season.getNum() == num)
 				return season;
 		}
-		throw new SeasonNotExistsException(num);
+		return null;
 	}
 	public void deleteSeason(Season season) {
 		seasons.remove(season);
