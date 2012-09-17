@@ -40,7 +40,7 @@ public class Season {
 	public Episode addEpisode(String name, String uri, int num) {
 		if (getEpisode(num) != null)
 			return null;
-		episode = new Episode(name, uri, num, this, serie);
+		Episode episode = new Episode(name, uri, num, this);
 		episodes.add(episode);
 		
 		return episode;

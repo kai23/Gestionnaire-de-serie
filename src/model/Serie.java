@@ -43,7 +43,8 @@ public class Serie {
 		this.name = name;
 	}
 	public Serie(int id, String name, String description) {
-		Serie(id, name);
+		this.id = id;
+		this.name = name;
 		this.description = description;
 	}
 
@@ -54,7 +55,7 @@ public class Serie {
 		if (getSeason(num) != null)
 			return null;
 		
-		season = new Season(this, num);
+		Season season = new Season(this, num);
 		seasons.add(season);
 		
 		return season;
