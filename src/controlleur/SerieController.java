@@ -15,7 +15,6 @@ public class SerieController {
 		File file = new File(dir);
 		File[] files = file.listFiles();
 		
-
 		// On récupère la liste de fichiers dans l'arraylist
 		if (files != null) {
 			for (int i = 0; i < files.length; i++) {
