@@ -1,10 +1,12 @@
 package model;
 
 import java.util.Iterator;
-
 import java.util.ArrayList;
 
 public class Serie {
+	/**
+	 * Attribute
+	 */
 	private int id;
 	private String name;
 	private ArrayList<Season> seasons;
@@ -40,15 +42,22 @@ public class Serie {
 		this.id = id;
 		this.name = name;
 	}
+	public Serie(int id, String name, String description) {
+		Serie(id, name);
+		this.description = description;
+	}
 
 	/**
 	 * Methods
 	 */
-	public boolean addSeason(Season season) {
-		if (getSeason(season.getNum()) != null)
-			return false;
-		return seasons.add(season);
-			
+	public Season addSeason(int num) {
+		if (getSeason(num) != null)
+			return null;
+		
+		season = new Season(this, num);
+		seasons.add(season);
+		
+		return season;
 	}
 	public Season getSeason(int num) {
 		Iterator<Season> it = seasons.iterator();
@@ -60,6 +69,7 @@ public class Serie {
 		return null;
 	}
 	public void deleteSeason(Season season) {
+		season.setSerie(null);
 		seasons.remove(season);
 	}
 }
