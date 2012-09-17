@@ -14,7 +14,7 @@ public class SerieController {
 	 * @param args
 	 */
 
-	public void listDirectory(String dir) {
+	public ArrayList<String> listDirectory(String dir) {
 		File file = new File(dir);
 		File[] files = file.listFiles();
 		ArrayList<String> listeFichier = new ArrayList<>();
@@ -32,12 +32,7 @@ public class SerieController {
 				}
 			}
 		}
-		
-		
-		// On affiche l'arrayListe
-		for (String string : listeFichier) {
-			System.out.println(string);
-		}
+		return listeFichier;
 
 	}
 

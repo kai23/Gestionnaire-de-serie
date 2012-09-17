@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import controlleur.SerieController;
 
 public class Main {
@@ -14,8 +16,10 @@ public class Main {
 		 * 
 		 */
 		
+		
+		String chemin = "/home/";
 		SerieController controller = new SerieController();
-		controller.listDirectory("/root");
+		ArrayList<String> listeFichiers = controller.listDirectory(chemin);
 	
 	}
 
