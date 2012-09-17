@@ -8,7 +8,10 @@ public class Serie {
 	private ArrayList<Season> seasons;
 	private Episode currentEpisode;
 	private String description;
-	
+
+	/**
+	 * Setter/Getter
+	 */
 	public int getId() {
 		return id;
 	}
@@ -27,11 +30,20 @@ public class Serie {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	/**
+	 * Constructor
+	 */
 	public Serie(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
-	
-	
+
+	/**
+	 * Methods
+	 */
+	public addEpisode(Episode episode) {
+		
+	}
+
 }
