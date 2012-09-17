@@ -1,5 +1,7 @@
 package application;
 
+import controlleur.SerieController;
+
 public class Main {
 
 	/**
@@ -11,7 +13,10 @@ public class Main {
 		 * Faire tous les tests ici !
 		 * 
 		 */
-
+		
+		SerieController controller = new SerieController();
+		controller.listDirectory("/root");
+	
 	}
 
 }
