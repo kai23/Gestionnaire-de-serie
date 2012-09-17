@@ -47,13 +47,12 @@ public class Episode {
 	/**
 	 * Constructor
 	 */
-	public Episode(String name, String uri, int num, Season season, Serie serie) {
+	Episode(String name, String uri, int num, Season season) {
 		this.name = name;
 		this.uri = uri;
 		this.num = num;
 		this.isWatched = false;
 		this.season = season;
-		this.serie = serie;
 	}
 	
 	/**

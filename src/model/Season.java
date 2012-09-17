@@ -29,7 +29,7 @@ public class Season {
 	/**
 	 * Constructor
 	 */
-	public Season(Serie serie, int num) {
+	Season(Serie serie, int num) {
 		this.serie = serie;
 		this.num = num;
 	}
