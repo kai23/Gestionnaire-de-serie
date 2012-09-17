@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Serie {
 	private int id;
 	private String name;
