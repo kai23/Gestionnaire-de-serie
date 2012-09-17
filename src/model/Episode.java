@@ -1,13 +1,18 @@
 package model;
 
 public class Episode {
+	/**
+	 * Attribute
+	 */
 	private String name;
 	private String uri;
 	private int num;
 	private boolean isWatched;
 	private Season season;
-	private Serie serie;
-	
+
+	/**
+	 * Setter/Getter
+	 */	
 	public String getName() {
 		return name;
 	}
@@ -38,24 +43,20 @@ public class Episode {
 	public void setSeason(Season season) {
 		this.season = season;
 	}
-	public Serie getSerie() {
-		return serie;
-	}
-	public void setSerie(Serie serie) {
-		this.serie = serie;
-	}
-	
-	
-	public Episode(String name, String uri, int num, boolean isWatched,
-			Season season, Serie serie) {
-		super();
+
+	/**
+	 * Constructor
+	 */
+	public Episode(String name, String uri, int num, Season season, Serie serie) {
 		this.name = name;
 		this.uri = uri;
 		this.num = num;
-		this.isWatched = isWatched;
+		this.isWatched = false;
 		this.season = season;
 		this.serie = serie;
 	}
 	
-	
+	/**
+	 * Methods
+	 */
 }

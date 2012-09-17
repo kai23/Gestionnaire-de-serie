@@ -37,26 +37,23 @@ public class Season {
 	/**
 	 * Methods
 	 */
-	public Episode addEpisode(int num) {
+	public Episode addEpisode(String name, String uri, int num) {
 		if (getEpisode(num) != null)
 			return null;
-		
-		episode = new Episode(serie, this, num);
+		episode = new Episode(name, uri, num, this, serie);
 		episodes.add(episode);
 		
 		return episode;
 	}
 	public Episode getEpisode(int num) {
-		Iterator<Episode> it = episodes.iterator();
-		while (it.hasNext()) {
-			Episode episode = it.next();
+		for (Episode episode : episodes) {
 			if (episode.getNum() == num)
 				return episode;
 		}
+
 		return null;
 	}
 	public void deleteEpisode(Episode episode) {
-		episode.setSeason(null);
 		episodes.remove(episode);
 	}
 

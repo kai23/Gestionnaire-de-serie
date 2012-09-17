@@ -60,16 +60,14 @@ public class Serie {
 		return season;
 	}
 	public Season getSeason(int num) {
-		Iterator<Season> it = seasons.iterator();
-		while (it.hasNext()) {
-			Season season = it.next();
+		for (Season season : seasons) {
 			if (season.getNum() == num)
 				return season;
 		}
+
 		return null;
 	}
 	public void deleteSeason(Season season) {
-		season.setSerie(null);
 		seasons.remove(season);
 	}
 }
