@@ -42,8 +42,8 @@ public class Serie {
 	/**
 	 * Methods
 	 */
-	public addEpisode(Episode episode) {
-		
+	public boolean addSeason(Season season) {
+		return seasons.add(season);
 	}
 
 }
