@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Iterator;
+
 import java.util.ArrayList;
 
 public class Serie {
@@ -42,20 +44,22 @@ public class Serie {
 	/**
 	 * Methods
 	 */
-	public boolean addSeason(Season season) {
-		if (getSeason(season.getNum()) == null)
-			return seasons.add(season);
-		else
-			return false;
+	public boolean addSeason(Season season)
+		throws SeasonExistsException {
+		if (getSeason(season.getNum()) != null)
+			throw new SeasonExistsException(season.getNum());
+		return seasons.add(season);
+			
 	}
-	public Season getSeason(int num) {
+	public Season getSeason(int num)
+	throws SeasonNotExistsException {
 		Iterator<Season> it = seasons.iterator();
 		while (it.hasNext()) {
 			Season season = it.next();
 			if (season.getNum() == num)
 				return season;
 		}
-		return null;
+		throw new SeasonNotExistsException(num);
 	}
 	public void deleteSeason(Season season) {
 		seasons.remove(season);
