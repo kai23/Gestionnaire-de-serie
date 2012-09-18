@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 public class PanelMain extends JPanel {
     public PanelMain() {
+    	super();
 		
 	}
 }

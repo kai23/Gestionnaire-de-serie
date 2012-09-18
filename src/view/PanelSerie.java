@@ -15,7 +15,9 @@ public class PanelSerie extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	public PanelSerie(){
-		
+		super();
+		//Indications de la mise en forme
+
 		//Recuperation des noms de series
 		ArrayList<String> mesSeries = new ArrayList<String>();
 		/*SerieController ctrl = new SerieController();
