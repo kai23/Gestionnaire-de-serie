@@ -9,21 +9,25 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTree;
 import javax.swing.ScrollPaneLayout;
 
 public class PanelMain extends JPanel {
     public PanelMain() {
     	super();
     	setLayout(new BorderLayout());
+    	
     	//Recuperer les infos de la série
     	JLabel infoBox = new JLabel("Ici, nous aurons les informations de la série");
     	//JLabel infoBox = new JLabel(serieCtrl.getInfo(););
-    	
+    	    	
     	
     	//Creation panel saisons
     	JPanel panelSeasons = new JPanel();
     	panelSeasons.setLayout(new BorderLayout());
     	panelSeasons.setBackground(Color.cyan);
+    	
+    	
     	
     	//Ajout des composants
     	add(infoBox, BorderLayout.PAGE_START);
