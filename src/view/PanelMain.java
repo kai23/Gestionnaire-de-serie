@@ -1,5 +1,7 @@
 package view;
 
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionEvent;
 
 import java.awt.Graphics;
@@ -29,23 +31,14 @@ import javax.swing.JTree;
 import javax.swing.ScrollPaneLayout;
 
 public class PanelMain extends JPanel implements ActionListener {
-	private JRadioButton infoBox;
-	
     public PanelMain() {
     	super();
     	setLayout(new BorderLayout());
     	
     	//Recuperer les infos de la serie
-		infoBox = new JRadioButton("<h1>Les Mutants</h1>");
-		infoBox.setIcon(new Icon() {
-				public void paintIcon(Component c, Graphics g, int x, int y) {}
-				public int getIconWidth() { return 0; }
-				public int getIconHeight() { return 0; }
-			});
-    	//JLabel infoBox = new JLabel(serieCtrl.getInfo(););
+		//JLabel infoBox = new JLabel(serieCtrl.getInfo(););
+		JLabel infoBox = new JLabel("Les Mutants");
 
-		infoBox.addActionListener(this);
-    	
     	//Creation des scrollbar
 		JPanel panelScrollpane = new JPanel();
 		JScrollPane scrollpane = new JScrollPane(panelScrollpane);
@@ -55,7 +48,14 @@ public class PanelMain extends JPanel implements ActionListener {
 			JPanel panelSeason = new JPanel(new BorderLayout());
 			panelScrollpane.add(panelSeason);
 
-			JLabel anonyme = new JLabel("Saison "+i);
+			JRadioButton anonyme = new JRadioButton("Saison " + i);
+			anonyme.setIcon(new Icon() {
+					public void paintIcon(Component c, Graphics g, int x, int y) {}
+					public int getIconWidth() { return 0; }
+					public int getIconHeight() { return 0; }
+				});
+			anonyme.addActionListener(this);
+    	
 			panelSeason.add(anonyme, BorderLayout.PAGE_START);
 
 			ArrayList<String> episodes = new ArrayList<String>();
@@ -81,8 +81,10 @@ public class PanelMain extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == infoBox) {
-			
-		}
+		JOptionPane.showMessageDialog(null , "test" , "C'est qui le plus fort" , JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void showInfoSerie(String serieName) {
+		JOptionPane.showMessageDialog(null, "test", serieName, JOptionPane.INFORMATION_MESSAGE);		
 	}
 }
