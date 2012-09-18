@@ -10,11 +10,15 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import controlleur.SerieController;
+
 public class PanelSerie extends JPanel implements ListSelectionListener{
 	private static final long serialVersionUID = 1L;
+	private PanelMain infoSerie;
 
-	public PanelSerie(){
+	public PanelSerie(PanelMain infoSerie){
 		super();
+		this.infoSerie = infoSerie;
 		setLayout(new BorderLayout());
 
 		//Recuperation des noms de series
@@ -46,8 +50,9 @@ public class PanelSerie extends JPanel implements ListSelectionListener{
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
+		//Recuperer le nom de la serie choisie
 		String nameSerie = (String) (((JList) e.getSource()).getSelectedValue());
-		JOptionPane.showMessageDialog(this, nameSerie, "LISTENER", JOptionPane.WARNING_MESSAGE);
-		
-	}
+		infoSerie.showInfoSerie(nameSerie);
+
+		}
 }
