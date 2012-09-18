@@ -2,8 +2,10 @@ package view;
 
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListModel;
 
 import controlleur.SerieController;
 
@@ -26,13 +28,18 @@ public class PanelSerie extends JPanel{
 		mesSeries.add("HIMYM");
 		mesSeries.add("The Simpsons");
 		
-		//Creation et remplissage de la JList
-		JList<String> listSerie = new JList<String>();
-		for(int i = 0; i<mesSeries.size(); i++){
-			listSerie.add(mesSeries.get(i), listSerie);
+			
+		//Passage par un defaultListModel
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+		for(int i = 0; i <mesSeries.size(); i++){
+			listModel.addElement(mesSeries.get(i));
 		}
+			
 		
-		//Ajout des composants
+		//Creation et remplissage de la JList
+		JList listSerie = new JList(listModel);
+		
+		//Ajout des components
 		PanelSerie.add(listSerie);
 		
 		
