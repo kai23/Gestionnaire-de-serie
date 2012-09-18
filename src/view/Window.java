@@ -24,6 +24,7 @@ public class Window extends JFrame {
 		pane.add(new PanelSerie(), BorderLayout.LINE_START);
 		pane.add(new PanelMain(), BorderLayout.CENTER);
 
+		
 		setVisible(true);
 	}
 }
