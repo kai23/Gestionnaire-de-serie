@@ -17,8 +17,8 @@ public class PanelMain extends JPanel {
     	super();
     	setLayout(new BorderLayout());
     	
-    	//Recuperer les infos de la série
-    	JLabel infoBox = new JLabel("Ici, nous aurons les informations de la série");
+    	//Recuperer les infos de la serie
+    	JLabel infoBox = new JLabel("Ici, nous aurons les informations de la serie");
     	//JLabel infoBox = new JLabel(serieCtrl.getInfo(););
     	    	
     	
