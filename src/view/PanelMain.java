@@ -39,10 +39,9 @@ public class PanelMain extends JPanel implements ActionListener {
 		infoBox = new JRadioButton("<h1>Les Mutants</h1>");
 		infoBox.setIcon(new Icon() {
 				public void paintIcon(Component c, Graphics g, int x, int y) {}
-				public void getIconWidth() { return 0; }
-				public void getIconHeight() { return 0; }
+				public int getIconWidth() { return 0; }
+				public int getIconHeight() { return 0; }
 			});
-    	infoBox = new JLabel("<h1>Les Mutants</h1>");
     	//JLabel infoBox = new JLabel(serieCtrl.getInfo(););
 
 		infoBox.addActionListener(this);
@@ -82,7 +81,7 @@ public class PanelMain extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == infobox) {
+		if (e.getSource() == infoBox) {
 			
 		}
 	}
