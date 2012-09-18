@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.event.ActionEvent;
+
 import java.awt.Graphics;
 import javax.swing.Icon;
 import javax.swing.JRadioButton;
@@ -79,7 +81,7 @@ public class PanelMain extends JPanel implements ActionListener {
     	add(scrollpane, BorderLayout.CENTER);
 	}
 
-	public void actionPerformed(ActionListener e) {
+	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == infobox) {
 			
 		}
