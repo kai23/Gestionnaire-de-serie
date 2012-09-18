@@ -1,5 +1,9 @@
 package view;
 
+import javax.swing.JList;
+import javax.swing.DefaultListModel;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 
 import javax.swing.JScrollPane;
@@ -26,21 +30,34 @@ public class PanelMain extends JPanel {
     	//JLabel infoBox = new JLabel(serieCtrl.getInfo(););
     	    	
     	
-    	//Creation panel saisons
-    	//JPanel panelSeasons = new JPanel(new ScrollPaneLayout());
-    	//panelSeasons.setBackground(Color.cyan);
     	//Creation des scrollbar
 		JPanel panelScrollpane = new JPanel();
-		panelScrollpane.setBackground(Color.pink);
-		
 		JScrollPane scrollpane = new JScrollPane(panelScrollpane);
-		scrollpane.setBackground(Color.cyan);
 
 		panelScrollpane.setLayout(new BoxLayout(panelScrollpane, BoxLayout.PAGE_AXIS));
-		panelScrollpane.add(new JButton("Saison 1"));
-		panelScrollpane.add(new JButton("Saison 2"));
-		panelScrollpane.add(new JButton("Saison 3"));				
-		
+		for (int i = 1; i <= 100; i++) {
+			JPanel panelSeason = new JPanel(new BorderLayout());
+			panelScrollpane.add(panelSeason);
+
+			JLabel anonyme = new JLabel("Saison "+i);
+			panelSeason.add(anonyme, BorderLayout.PAGE_START);
+
+			ArrayList<String> episodes = new ArrayList<String>();
+			episodes.add("1 - Les mutants juniors");
+			episodes.add("2 - Le retours des mutants juniors");
+			episodes.add("3 - La fin des mutants juniors");
+			episodes.add("4 - Les mutants séniors");
+			episodes.add("5 - Le retours des mutants séniors");
+			episodes.add("6 - La fin des mutants séniors");
+
+			DefaultListModel<String> listModel = new DefaultListModel<String>();
+			for (String episode : episodes) {
+				listModel.addElement(episode);
+			}
+			JList listEpisodes = new JList(listModel);
+
+			panelSeason.add(listEpisodes, BorderLayout.CENTER);
+		}
     	
     	//Ajout des composants
     	add(infoBox, BorderLayout.PAGE_START);
