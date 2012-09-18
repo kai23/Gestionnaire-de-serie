@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -19,14 +20,15 @@ import com.moviejukebox.thetvdb.model.Series;
 
 public class SerieController {
 
-	ArrayList<String> listeFichier = new ArrayList<>();
+	ArrayList<File> listeFichier = new ArrayList<>();
 	UtilitaireSerie utilitaireSerie = new UtilitaireSerie();
 	String apiKey = "6FB2F69F85316497";
+
 	/**
 	 * @param args
 	 */
 
-	public ArrayList<String> listDirectory(String dir) {
+	public ArrayList<File> listDirectory(String dir) {
 		File file = new File(dir);
 		File[] files = file.listFiles();
 
@@ -35,8 +37,8 @@ public class SerieController {
 			for (int i = 0; i < files.length; i++) {
 
 				// On vérifie si c'est pas un repertoire
-				if (files[i].isDirectory() == false) {
-					listeFichier.add(files[i].getAbsolutePath());
+				if (files[i].isDirectory() == false && !files[i].isHidden()) {
+					listeFichier.add(files[i]);
 				}
 
 				// Si c'en est un, alors on relance la fonction pour chercher
@@ -69,84 +71,141 @@ public class SerieController {
 
 		// On récupère le nom du fichier à renommer
 		String nomSerie = fichier_a_renommer.getName();
-
+		
+		// On récupère l'extension
+		String ext = fichier_a_renommer.getName().substring(fichier_a_renommer.getName().lastIndexOf("."), fichier_a_renommer.getName().length());
+		
+		
 		/* On cherche le nom de la série grace à notre super utilitaire ! */
-		Episode episodeTrouve = this.trouverNomSerie(nomSerie);
+		ArrayList<Object> episodeTrouve = this.trouverNomSerie(nomSerie);
 
 		// Y'a plus qu'a faire le renomage !
-		// TODO
+		System.out.println(
+				"Renommer pour \"" + 
+						episodeTrouve.get(0) + 
+						" S" + episodeTrouve.get(1) +
+						"E" + episodeTrouve.get(2)+ 
+						" - " + episodeTrouve.get(3)+"\" ? O/N ");
+		String choixRenommage = Clavier.lireString();
+		if (choixRenommage.equals("O") || choixRenommage.equals("o")) {
+			String renommage = episodeTrouve.get(0) + 
+					" S" + episodeTrouve.get(1) +
+					"E" + episodeTrouve.get(2)+ 
+					" - " + episodeTrouve.get(3)+
+					ext;
+			
+			
+			
+			String nouveau_nom = fichier_a_renommer.getParent()+"/"+renommage;
+			
+			
+			
+			fichier_a_renommer.renameTo(new File(nouveau_nom));
+		}
 
 	}
 
-	public Episode trouverNomSerie(String nomSerie) {
-		
-		
+	public ArrayList<Object> trouverNomSerie(String nomSerie) {
+
 		// Les variables dont on aura besoin
 		TheTVDB tvdb = new TheTVDB(apiKey);
 		List<Series> serieRecherchee = null;
 		Episode episode = new Episode();
 		String nouveauNom;
-		
-		// On commence à faire les recherche par un explode, avec le premier
-		String[] tokens = nomSerie.split("-");
-		nouveauNom = tokens[0];
-		serieRecherchee = tvdb.searchSeries(nouveauNom, "fr");
-		
-		// Ca n'a pas marché :(
-		if (serieRecherchee.isEmpty()) {
+		int numEpisode;
+		String saisonTemp;
+		int saison;
+
+		// Première recherche à chaud de la saison *ça brule :D*
+		Scanner scanner = new Scanner(nomSerie);
+		String chiffre1 = scanner.findInLine("\\d");
+		try {
+			if (chiffre1.equals("0")) {
+				chiffre1 = scanner.findInLine("\\d");
+			} else {
+				chiffre1 = chiffre1.concat(scanner.findInLine("\\d"));
+			}
+			
+			saisonTemp = chiffre1;
+			if (saisonTemp.length() == 1) {
+				saisonTemp = "0".concat(saisonTemp);
+			}
+			
+			// On caste la saison
+			saison = Integer.parseInt(saisonTemp);
+			// Puis celle de l'épisode
+			String chiffre3 = scanner.findInLine("\\d");
+			String chiffre4 = scanner.findInLine("\\d");
+			if (chiffre4 != null) {
+				chiffre3 = chiffre3.concat(chiffre4);
+			}
+			
+			// On récupère le numéro de l'épisode sous forme de int
+			numEpisode = Integer.parseInt(chiffre3);
+			System.out.println("Trouvé : Saison " + saison + " Episode " + numEpisode);
+
 			
 		}
-		
-		// Youhou ! Du premier coup \o/ *like a boss*
-		else {
-			System.out.println("Merci de saisir la série : ");
+		catch (NullPointerException e) {
+			System.out.println("Aucune saison ou épisode n'a pu être trouvé");
+			System.out.println("Saison : ");
+			saison = Clavier.lireInt();
+			
+			System.out.println("Episode :");
+			numEpisode = Clavier.lireInt();
 		}
+			
+		// On commence à faire les recherche par un explode sur la ponctuation
+		String[] tokens = nomSerie.split("\\p{Punct}");
+		nouveauNom = tokens[0];
+
+		// System.out.println(nouveauNom);
+		serieRecherchee = tvdb.searchSeries(nouveauNom, "fr");
+		if (serieRecherchee.size() > 10) {
+			System.out.println("Beaucoup trop de résultats ! merci de saisir le nom :");
+			nouveauNom = Clavier.lireString();
+			serieRecherchee = tvdb.searchSeries(nouveauNom, "fr");
+		}
+		if (serieRecherchee.isEmpty()) {
+			tokens = nomSerie.split("\\d");
+			nouveauNom = tokens[0];
+			serieRecherchee = tvdb.searchSeries(nouveauNom, "fr");
+			if (serieRecherchee.isEmpty()) {
+				System.out.println("Désolé, je ne trouve pas la série recherchée, merci de la saisir à la main");
+				nouveauNom = Clavier.lireString();
+				serieRecherchee = tvdb.searchSeries(nouveauNom, "fr");
+			}
+		}
+		int i = 0;
+		for (Series series : serieRecherchee) {
+			System.out.println(i + " " + series.getSeriesName());
+			i++;
+		}
+
+		int choix = Clavier.lireInt();
+		Series serie = serieRecherchee.get(choix);
+
+		// On cherches les épisodes de la série
+		List<Episode> episodes = tvdb.getSeasonEpisodes(serie.getId(), saison, "fr");
+
+		// On récupère l'épisode recherché
+		episode = episodes.get(numEpisode- 1);
+
+		// On crée l'arraylist avec les différents objets
+		ArrayList<Object> listeAttributs = new ArrayList<Object>();
+		listeAttributs.add(serie.getSeriesName());
+		listeAttributs.add(saison);
+		listeAttributs.add(numEpisode);
+		listeAttributs.add(episode.getEpisodeName());
 		
-		
-		// // l'utilisateur de le rentrer lui même
-		// if (nomSerie == null) {
-		// System.out.println("La série n'a pas été trouvée. Merci d'en saisir une : ");
-		// nomSerie = Clavier.lireString();
-		//
-		// // On recherche la série via le nom
-		// serieRecherchee = tvdb.searchSeries(nomSerie, "fr");
-		//
-		// }
-		//
-		// // Ca y est, on a un nom valide !
-		// // On recherche les éventuels doublons
-		// serieRecherchee = tvdb.searchSeries(nomSerie, "fr");
-		// // On affiche ce qu'on a trouvé
-		// int i = 0;
-		// for (Series series : serieRecherchee) {
-		// System.out.println(i + " " + series.getSeriesName());
-		// i++;
-		// }
-		//
-		// // Réinitialisation de i
-		// i = 0;
-		//
-		// // Choix de la série
-		// int choix = Clavier.lireInt();
-		// Series serie = serieRecherchee.get(choix);
-		//
-		// // Choix de la saison
-		// System.out.println("Merci de choisir une saison");
-		// int saison = Clavier.lireInt();
-		//
-		// // Choix de l'épisode
-		// System.out.println("Voici les épisodes correspondants : ");
-		// List<Episode> episodes = tvdb.getSeasonEpisodes(serie.getId(),
-		// saison,
-		// "fr");
-		// for (Episode episode : episodes) {
-		// System.out.println(i + " " + episode.getEpisodeName());
-		// i++;
-		// }
-		// System.out.println("Choisir un épisode");
-		// int episodeChoisit = Clavier.lireInt();
-		// Episode episode = episodes.get(episodeChoisit);
-		return episode;
+		return listeAttributs;
+
+	}
+
+	public int getSerieIDbyName(String nomSerie) {
+		int idSerie = 0;
+
+		return idSerie;
 	}
 
 }
