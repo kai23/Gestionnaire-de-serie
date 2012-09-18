@@ -1,14 +1,23 @@
 package controlleur;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.BasicConfigurator;
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import model.Serie;
+import com.moviejukebox.*;
+import com.moviejukebox.thetvdb.TheTVDB;
+import com.moviejukebox.thetvdb.model.Episode;
+import com.moviejukebox.thetvdb.model.Series;
+
 
 public class SerieController {
 
 	ArrayList<String> listeFichier = new ArrayList<>();
-
 	/**
 	 * @param args
 	 */
@@ -38,7 +47,7 @@ public class SerieController {
 
 	}
 
-	private ArrayList<String> getAllSerieName() {
+	public ArrayList<String> getAllSerieName() {
 		Serie serie = new Serie();
 		ArrayList<String> listeNomSerie = new ArrayList<>();
 		
@@ -51,5 +60,15 @@ public class SerieController {
 
 		return listeNomSerie;
 	}
+	
+	
+	public void renameEpisode(String nomEpisode) {
+		TheTVDB tvdb = new TheTVDB("6FB2F69F85316497");
+		Series serie = tvdb.getSeries(nomEpisode, "fr");
+		String airOfWeek = serie.getAirsDayOfWeek();
+		System.out.println(airOfWeek);
+		
+	}
+	
 
 }
