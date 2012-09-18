@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 
 public class Window extends JFrame {
@@ -7,6 +9,6 @@ public class Window extends JFrame {
 		super("Ma fenêtre");
 
 		setLayout(new BorderLayout());
-		add(BorderLayout.CENTER)
+		add(BorderLayout.CENTER);
 	}
 }
