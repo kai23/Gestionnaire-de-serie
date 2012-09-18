@@ -15,7 +15,6 @@ public class PanelSerie extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	public PanelSerie(){
-		JPanel PanelSerie = new JPanel();
 		
 		//Recuperation des noms de series
 		ArrayList<String> mesSeries = new ArrayList<String>();
@@ -40,7 +39,7 @@ public class PanelSerie extends JPanel{
 		JList listSerie = new JList(listModel);
 		
 		//Ajout des components
-		PanelSerie.add(listSerie);
+		add(listSerie);
 		
 		
 	}
