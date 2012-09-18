@@ -1,5 +1,11 @@
 package view;
 
+import java.awt.Graphics;
+import javax.swing.Icon;
+import javax.swing.JRadioButton;
+
+import java.awt.event.ActionListener;
+
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import java.util.ArrayList;
@@ -20,15 +26,24 @@ import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneLayout;
 
-public class PanelMain extends JPanel {
+public class PanelMain extends JPanel implements ActionListener {
+	private JRadioButton infoBox;
+	
     public PanelMain() {
     	super();
     	setLayout(new BorderLayout());
     	
     	//Recuperer les infos de la serie
-    	JLabel infoBox = new JLabel("Ici, nous aurons les informations de la serie");
+		infoBox = new JRadioButton("<h1>Les Mutants</h1>");
+		infoBox.setIcon(new Icon() {
+				public void paintIcon(Component c, Graphics g, int x, int y) {}
+				public void getIconWidth() { return 0; }
+				public void getIconHeight() { return 0; }
+			});
+    	infoBox = new JLabel("<h1>Les Mutants</h1>");
     	//JLabel infoBox = new JLabel(serieCtrl.getInfo(););
-    	    	
+
+		infoBox.addActionListener(this);
     	
     	//Creation des scrollbar
 		JPanel panelScrollpane = new JPanel();
@@ -62,5 +77,11 @@ public class PanelMain extends JPanel {
     	//Ajout des composants
     	add(infoBox, BorderLayout.PAGE_START);
     	add(scrollpane, BorderLayout.CENTER);
+	}
+
+	public void actionPerformed(ActionListener e) {
+		if (e.getSource() == infobox) {
+			
+		}
 	}
 }
