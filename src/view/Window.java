@@ -17,6 +17,7 @@ public class Window extends JFrame {
 		setLayout(new BorderLayout());
 		Container pane = getContentPane();
 
+		toolbar = new JToolBar();
 		pane.add(toolbar, BorderLayout.PAGE_START);
 		pane.add(new PanelSerie(), BorderLayout.LINE_START);
 		pane.add(new PanelMain(), BorderLayout.CENTER);
