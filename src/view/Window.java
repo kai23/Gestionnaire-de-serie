@@ -24,7 +24,9 @@ public class Window extends JFrame {
 		pane.add(new PanelSerie(), BorderLayout.LINE_START);
 		pane.add(new PanelMain(), BorderLayout.CENTER);
 
-		
+		setSize(500, 500);
+		setResizable(true);
 		setVisible(true);
+		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 	}
 }
