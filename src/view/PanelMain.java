@@ -1,5 +1,9 @@
 package view;
 
+import javax.swing.JButton;
+
+import javax.swing.JScrollPane;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -23,19 +27,23 @@ public class PanelMain extends JPanel {
     	    	
     	
     	//Creation panel saisons
-    	JPanel panelSeasons = new JPanel();
-    	panelSeasons.setLayout(new BorderLayout());
-    	panelSeasons.setBackground(Color.cyan);
-    	
-    	
+    	//JPanel panelSeasons = new JPanel(new ScrollPaneLayout());
+    	//panelSeasons.setBackground(Color.cyan);
+    	//Creation des scrollbar
+		JPanel panelScrollpane = new JPanel();
+		panelScrollpane.setBackground(Color.pink);
+		
+		JScrollPane scrollpane = new JScrollPane(panelScrollpane);
+		scrollpane.setBackground(Color.cyan);
+
+		panelScrollpane.setLayout(new BoxLayout(panelScrollpane, BoxLayout.PAGE_AXIS));
+		panelScrollpane.add(new JButton("Saison 1"));
+		panelScrollpane.add(new JButton("Saison 2"));
+		panelScrollpane.add(new JButton("Saison 3"));				
+		
     	
     	//Ajout des composants
     	add(infoBox, BorderLayout.PAGE_START);
-    	add(panelSeasons, BorderLayout.CENTER);
-    	
-    	
-    	
-    	
-		
+    	add(scrollpane, BorderLayout.CENTER);
 	}
 }
