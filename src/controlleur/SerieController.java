@@ -2,8 +2,10 @@ package controlleur;
 
 
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.*;
+
+import utils.Clavier;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.Serie;
 import com.moviejukebox.thetvdb.TheTVDB;
+import com.moviejukebox.thetvdb.model.Episode;
 import com.moviejukebox.thetvdb.model.Series;
 
 
@@ -63,15 +66,41 @@ public class SerieController {
 	}
 	
 	
-	public void renameEpisode(String nomEpisode) {
+	public void renameEpisode(String nomSerie) {
 		String apiKey = "6FB2F69F85316497";
 		TheTVDB tvdb = new TheTVDB(apiKey);
-		System.out.println(TheTVDB.getXmlMirror(apiKey));
-		List<Series> serie = tvdb.searchSeries(nomEpisode, "fr");
+		List<Series> serieRecherchee = tvdb.searchSeries(nomSerie, "fr");
 		try {
-			;
+			
+			System.out.println("Saisir la série choisie : ");
+			int i = 0;
+			for (Series series : serieRecherchee) {
+				System.out.println(i +" "+ series.getSeriesName());
+				i++;
+			}
+			i=0;
+			System.out.println("Saisir la série choisie : ");
+			int choix = Clavier.lireInt();
+			Series serie = serieRecherchee.get(choix);
+			System.out.println("Merci de choisir une saison");
+			int saison = Clavier.lireInt();
+			System.out.println("Voici les épisodes correspondants : ");
+			List<Episode> episodes = tvdb.getSeasonEpisodes(serie.getId(), saison, "fr");
+			for (Episode episode : episodes) {
+				System.out.println(i+" "+episode.getEpisodeName());
+				i++;
+			}
+			System.out.println("Choisir un épisode");
+			int episodeChoisit = Clavier.lireInt();
+			Episode episode = episodes.get(episodeChoisit);
+			System.out.println("Voici l'overview");
+			System.out.println(episode.getOverview());
+			
+			
 		} catch (NullPointerException e) {
-			System.out.println("Pas de série de ce nom !");
+			System.out.println("Aucune série n'a été trouvée !");
+		} catch (IndexOutOfBoundsException e2) {
+			System.out.println("Cette série n'existe pas");
 		}
 	}
 	
