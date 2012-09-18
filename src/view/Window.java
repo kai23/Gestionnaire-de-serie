@@ -44,10 +44,11 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		boutonParam.addActionListener(this);
 		boxSearch.addKeyListener(this);
 
+		PanelMain infoSerie = new PanelMain();
 		//Ajout des blocs
 		pane.add(toolbar, BorderLayout.PAGE_START);
-		pane.add(new PanelSerie(), BorderLayout.LINE_START);
-		pane.add(new PanelMain(), BorderLayout.CENTER);
+		pane.add(new PanelSerie(infoSerie), BorderLayout.LINE_START);
+		pane.add(infoSerie, BorderLayout.CENTER);
 
 		setSize(500, 500);
 		setResizable(true);
@@ -59,12 +60,11 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == boutonAjout){
 			JOptionPane.showMessageDialog(this, "Add", "Add", JOptionPane.WARNING_MESSAGE);
-		}
-		if(e.getSource() == boutonParam){
-			JOptionPane.showMessageDialog(this, "Settings", "Settings", JOptionPane.WARNING_MESSAGE);
-		} 
-		
-		
+		}else{
+			if(e.getSource() == boutonParam){
+				SettingsFrame mesParams = new SettingsFrame();
+			} 
+		}	
 	}
 	
 	public void keyPressed(KeyEvent e) 

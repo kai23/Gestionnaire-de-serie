@@ -5,13 +5,20 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class PanelSerie extends JPanel{
+import controlleur.SerieController;
+
+public class PanelSerie extends JPanel implements ListSelectionListener{
 	private static final long serialVersionUID = 1L;
+	private PanelMain infoSerie;
 
-	public PanelSerie(){
+	public PanelSerie(PanelMain infoSerie){
 		super();
+		this.infoSerie = infoSerie;
 		setLayout(new BorderLayout());
 
 		//Recuperation des noms de series
@@ -34,9 +41,18 @@ public class PanelSerie extends JPanel{
 		
 		//Creation et remplissage de la JList
 		JList listSerie = new JList(listModel);
+		listSerie.addListSelectionListener(this);
 		
 		//Ajout des components
 		add(listSerie);
 		
 	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		//Recuperer le nom de la serie choisie
+		String nameSerie = (String) (((JList) e.getSource()).getSelectedValue());
+		infoSerie.showInfoSerie(nameSerie);
+
+		}
 }
