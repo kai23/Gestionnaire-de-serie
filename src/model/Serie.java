@@ -75,6 +75,7 @@ public class Serie {
 		seasons.remove(season);
 	}
 	
+	
 	public ArrayList<Serie> getAllSeries() {
 		ArrayList<Serie> series = new ArrayList<>();
 		
