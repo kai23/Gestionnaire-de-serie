@@ -38,6 +38,9 @@ public class Serie {
 	/**
 	 * Constructor
 	 */
+	
+	public Serie(){}
+	
 	public Serie(int id, String name) {
 		this.id = id;
 		this.name = name;
@@ -71,4 +74,15 @@ public class Serie {
 	public void deleteSeason(Season season) {
 		seasons.remove(season);
 	}
+	
+	public ArrayList<Serie> getAllSeries() {
+		ArrayList<Serie> series = new ArrayList<>();
+		
+		// Faire ici la fonction permettant de récupérer les séries dans le XML
+		
+		
+		return series;
+		
+	}
+	
 }
