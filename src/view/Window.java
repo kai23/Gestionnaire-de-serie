@@ -1,11 +1,10 @@
 package view;
 
-import javax.swing.JToolBar;
 
 import java.awt.BorderLayout;
-
 import java.awt.Container;
-
+import javax.swing.JButton;
+import javax.swing.JToolBar;
 import javax.swing.JFrame;
 
 public class Window extends JFrame {
@@ -18,8 +17,13 @@ public class Window extends JFrame {
 		Container pane = getContentPane();
 
 		toolbar = new JToolBar();
+		JButton btn = new JButton("Ajouter");
+		toolbar.add(btn);
+
 		pane.add(toolbar, BorderLayout.PAGE_START);
 		pane.add(new PanelSerie(), BorderLayout.LINE_START);
 		pane.add(new PanelMain(), BorderLayout.CENTER);
+
+		setVisible(true);
 	}
 }
