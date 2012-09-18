@@ -29,9 +29,7 @@ public class Main {
 		
 		// On affiche notre liste
 		System.out.println(listeFichiers);
-		
-		controller.renameEpisode("malcolm");
-		
+				
 		
 	}
 
