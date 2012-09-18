@@ -22,7 +22,7 @@ public class PanelMain extends JPanel {
     	
     	//Creation panel saisons
     	JPanel panelSeasons = new JPanel();
-    	panelSeasons.setLayout(new ScrollPaneLayout());
+    	panelSeasons.setLayout(new BorderLayout());
     	panelSeasons.setBackground(Color.cyan);
     	
     	//Ajout des composants
