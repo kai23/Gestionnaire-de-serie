@@ -17,6 +17,7 @@ import model.Serie;
 import com.moviejukebox.thetvdb.TheTVDB;
 import com.moviejukebox.thetvdb.model.Episode;
 import com.moviejukebox.thetvdb.model.Series;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class SerieController {
 
@@ -332,7 +333,12 @@ public class SerieController {
 		return SaisonEpisode;
 	}
 	
-	
+	public List<Series> trouverSerieTVDB(String nomSerie) {
+		// Les variables dont on aura besoin
+		TheTVDB tvdb = new TheTVDB(apiKey);
+		List<Series> serieRecherchee = tvdb.searchSeries(nomSerie, "fr");
+		return serieRecherchee;
+	}
 	public Serie getSerieByName(String name) {
 		Serie serie = new Serie(0,"Pirates","Pirates des caraibes !");
 		//serie = serie.searchSerieByName(name);
