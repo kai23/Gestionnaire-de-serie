@@ -52,22 +52,29 @@ public class Serie {
 	 */
 
 	public Serie() {
+		this.seasons = new ArrayList<Season>();
 	}
 
 	public Serie(int id, String name) {
 		this.id = id;
 		this.name = name;
+		this.seasons = new ArrayList<Season>();
 	}
 
 	public Serie(int id, String name, String description) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.seasons = new ArrayList<Season>();
 	}
 
 	/**
 	 * Methods
 	 */
+	public void addSeason(Season season) {
+		seasons.add(season);
+	}
+	
 	public Season addSeason(int num) {
 		if (getSeason(num) != null)
 			return null;
@@ -91,106 +98,78 @@ public class Serie {
 		seasons.remove(season);
 	}
 
-	public ArrayList<String> getAllSeason() {
-		ArrayList<String> season = new ArrayList<>();
-		{
-			Document document = null;
-			Element racine;
+	public ArrayList<Season> getAllSeason() {
+		return seasons;
+	}
 
-			SAXBuilder sxb = new SAXBuilder();
-			try {
-				// On crée un nouveau document JDOM avec en argument le fichier
-				// XML
-				// Le parsing est terminé ;)
-				try {
-					document = sxb.build(new File("BaseDeDonneeSerie.xml"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("Ne trouve pas le fichier !");
-				}
-			} catch (JDOMException e) {
-			}
-
-			// On initialise un nouvel élément racine avec l'élément racine du
-			// document.
-			racine = document.getRootElement();
-			// On crée une List contenant tous les noeuds "Series" de l'Element
-			// racine
-			List listageSerie = racine.getChildren("Serie");
-
-			// On crée un Iterator sur notre liste de série
-			Iterator i = listageSerie.iterator();
-			while (i.hasNext()) {
-				// On parcourt toutes les séries
-				Element serieCourant = (Element) i.next();
-				// On crée une List contenant tous les noeuds "Saisons" de
-				// l'Element
-				// SerieCourant
-				List listageSaison = serieCourant.getChildren("Saison");
-				// On crée un Iterator sur notre liste de saison
-				Iterator s = listageSaison.iterator();
-				while (s.hasNext()) {
-					// On parcourt toutes les saisons
-					Element saisonCourant = (Element) s.next();
-					// On affiche le résultat
-					/*System.out.println("Saison "
-							+ saisonCourant.getAttributeValue("numberS"));*/
-					season.add(saisonCourant.getAttributeValue("numberS"));
-				}
-			}
-			System.out.println(season);
+	public String toString() {
+		String ret = name + " " + id + "\n";
+		for (Season season : seasons) {
+			ret = ret + "\t" + season + "\n";
 		}
-		return season;
+		return ret;
 	}
 	
-	public ArrayList<String> getAllSeries() {
-		ArrayList<String> series = new ArrayList<>();
-		{
-			Document document = null;
-			Element racine;
+	public static ArrayList<Serie> getAllSeries(String file) {
+		ArrayList<Serie> series = new ArrayList<Serie>();
 
-			SAXBuilder sxb = new SAXBuilder();
+		Document document = null;
+
+		SAXBuilder sxb = new SAXBuilder();
+		try {
+			// On crée un nouveau document JDOM avec en argument le fichier
+			// XML
+			// Le parsing est terminé ;)
 			try {
-				// On crée un nouveau document JDOM avec en argument le fichier
-				// XML
-				// Le parsing est terminé ;)
-				try {
-					document = sxb.build(new File("BaseDeDonneeSerie.xml"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("Ne trouve pas le fichier !");
-				}
-			} catch (JDOMException e) {
+				document = sxb.build(new File(file));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("Ne trouve pas le fichier !");
 			}
-
-			// On initialise un nouvel élément racine avec l'élément racine du
-			// document.
-			racine = document.getRootElement();
-			// On crée une List contenant tous les noeuds "Series" de l'Element
-			// racine
-			List listageSerie = racine.getChildren("Serie");
-
-			// On crée un Iterator sur notre liste de série
-			Iterator i = listageSerie.iterator();
-			while (i.hasNext()) {
-				// On parcourt toutes les séries
-				Element serieCourant = (Element) i.next();
-				// On affiche le résultat
-				/*
-				 * System.out.println("Série: " +
-				 * serieCourant.getAttributeValue("name") + "   |   " +
-				 * "langue: " + serieCourant.getAttributeValue("lang") +
-				 * "   |   " + "Emplacement: " +
-				 * serieCourant.getAttributeValue("folder"));
-				 */
-				series.add(serieCourant.getAttributeValue("name"));
-
-			}
-			System.out.println(series);
+		} catch (JDOMException e) {
 		}
-		return series;
 
+		// On initialise un nouvel élément racine avec l'élément racine du
+		// document.
+		Element racine = document.getRootElement();
+		// On crée une List contenant tous les noeuds "Series" de l'Element
+		// racine
+		List listageSerie = racine.getChildren("Serie");
+
+		// On crée un Iterator sur notre liste de série
+		Iterator i = listageSerie.iterator();
+		while (i.hasNext()) {
+			// On parcourt toutes les séries
+			Element serieCourant = (Element) i.next();
+
+			Serie serie = new Serie(Integer.parseInt(serieCourant.getAttributeValue("id")),
+									serieCourant.getAttributeValue("name"));
+									
+			
+			List seasonNodes = serieCourant.getChildren("Saison");
+			for (Object seasonObject : seasonNodes) {
+				Element seasonNode = (Element)seasonObject;
+
+				Season season = new Season(serie,
+										   Integer.parseInt(seasonNode.getAttributeValue("numberS")));
+
+				List episodeNodes = seasonNode.getChildren("Episode");
+				for (Object episodeObject : episodeNodes) {
+					Element episodeNode = (Element)episodeObject;
+
+					season.addEpisode(episodeNode.getValue(), "/",
+									  Integer.parseInt(episodeNode.getAttributeValue("numberE")));
+					
+				}
+				serie.addSeason(season);				
+			}
+			series.add(serie);
+			System.out.println(serie);
+				//series.add(serieCourant.getAttributeValue("name"));
+
+		}
+		System.out.println(series);
+		return series;
 	}
 }

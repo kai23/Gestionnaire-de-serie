@@ -80,4 +80,8 @@ public class Episode {
 	/**
 	 * Methods
 	 */
+
+	public String toString() {
+		return "" + num + " " + name + " (" + uri + ")";
+	}
 }
