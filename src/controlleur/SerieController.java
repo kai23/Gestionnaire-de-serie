@@ -234,5 +234,51 @@ public class SerieController {
 
 		return idSerie;
 	}
+	
+	
+	public String trouverSaisonEpisode(String nomSerieBrut) {
+				// Première recherche à chaud de la saison *ça brule :D*
+				Scanner scanner = new Scanner(nomSerieBrut);
+				String chiffre1 = scanner.findInLine("\\d");
+				int saison;
+				int numEpisode;
+				try {
+					if (chiffre1.equals("0")) {
+						chiffre1 = scanner.findInLine("\\d");
+					} else {
+						chiffre1 = chiffre1.concat(scanner.findInLine("\\d"));
+					}
+					
+					String saisonTemp = chiffre1;
+					if (saisonTemp.length() == 1) {
+						saisonTemp = "0".concat(saisonTemp);
+					}
+					
+					// On caste la saison
+					saison = Integer.parseInt(saisonTemp);
+					// Puis celle de l'épisode
+					String chiffre3 = scanner.findInLine("\\d");
+					String chiffre4 = scanner.findInLine("\\d");
+					if (chiffre4 != null) {
+						chiffre3 = chiffre3.concat(chiffre4);
+					}
+					
+					// On récupère le numéro de l'épisode sous forme de int
+					numEpisode = Integer.parseInt(chiffre3);
+					System.out.println("Trouvé : Saison " + saison + " Episode " + numEpisode);
+					nomSerieBrut = "S"+saison+"E"+numEpisode;
+					
+				}
+				catch (NullPointerException e) {
+					System.out.println("Aucune saison ou épisode n'a pu être trouvé");
+					System.out.println("Saison : ");
+					saison = Clavier.lireInt();
+					
+					System.out.println("Episode :");
+					numEpisode = Clavier.lireInt();
+				}
+		
+		return nomSerieBrut;
+	}
 
 }
