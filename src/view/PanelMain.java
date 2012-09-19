@@ -1,39 +1,31 @@
 package view;
 
-import javax.swing.JOptionPane;
-
-import java.awt.event.ActionEvent;
-
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Graphics;
-import javax.swing.Icon;
-import javax.swing.JRadioButton;
-
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JList;
-import javax.swing.DefaultListModel;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.TextArea;
+import controlleur.SerieController;
 
-import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTree;
-import javax.swing.ScrollPaneLayout;
+import model.Serie;
 
 public class PanelMain extends JPanel implements ActionListener {
 	
-	private JLabel infoBox = new JLabel("Les Mutants");
-	
+	/* ATTRIBUTS */
+	//Widgets
+	private JLabel wInfoBox = new JLabel("Les Mutants");
 	public class SeasonField {
 		public SeasonField(JRadioButton title, JList episodes) {
 			this.title = title;
@@ -42,29 +34,21 @@ public class PanelMain extends JPanel implements ActionListener {
 		public JRadioButton title;
 		public JList episodes;
 	}
-
-	private String serieName;
-	private ArrayList<SeasonField> seasons;
-	//private JList listEpisodes;
+	private Serie serie;
+	private ArrayList<SeasonField> wSeasons;
 
     public PanelMain() {
     	super();
     	setLayout(new BorderLayout());
-    	serieName = getSerieName();
-    	infoBox.setText(serieName);
-    	System.out.println("Panel Main" + serieName);
-		seasons = new ArrayList<SeasonField>();
-
-    	//Recuperer les infos de la serie
-		//JLabel infoBox = new JLabel(serieCtrl.getInfo(););
-		//JLabel infoBox = new JLabel("Les Mutants");
+    	setSerie(getSerie());
+		wSeasons = new ArrayList<SeasonField>();
 
     	//Creation des scrollbar
 		JPanel panelScrollpane = new JPanel();
 		JScrollPane scrollpane = new JScrollPane(panelScrollpane);
 
 		panelScrollpane.setLayout(new BoxLayout(panelScrollpane, BoxLayout.PAGE_AXIS));
-		for (int i = 1; i <= 100; i++) {
+		/*for (int i = 1; i <= serie.getAllSeasons().size(); i++) {
 			JPanel panelSeason = new JPanel(new BorderLayout());
 			panelScrollpane.add(panelSeason);
 
@@ -93,31 +77,32 @@ public class PanelMain extends JPanel implements ActionListener {
 			JList listEpisodes = new JList(listModel);
 
 			panelSeason.add(listEpisodes, BorderLayout.CENTER);
-			seasons.add(new SeasonField(season, listEpisodes));
-		}
+			wSeasons.add(new SeasonField(season, listEpisodes));
+		}*/
     	
     	//Ajout des composants
-    	add(infoBox, BorderLayout.PAGE_START);
+    	add(wInfoBox, BorderLayout.PAGE_START);
     	add(scrollpane, BorderLayout.CENTER);
 	}
 
     /* GETTEURS ET SETTEURS */
-    public String getSerieName() {
-		return serieName;
+	public Serie getSerie() {
+		return serie;
 	}
 
-	public void setSerieName(String serieName) {
-		this.serieName = serieName;
-//		this.infoBox.setText(this.serieName);
+	public void setSerie(Serie serie) {
+		this.serie = serie;
 	}
+
 	
 	public void updateView(){
-		this.infoBox.setText(this.serieName);
+		this.wInfoBox.setText(this.serie.getName());
+		//this.wSeasons = this.serie.getAllSeason();
 		this.updateUI();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		for (SeasonField season : seasons) {
+		for (SeasonField season : wSeasons) {
 			if (e.getSource() == season.title)
 				season.episodes.setVisible(!season.episodes.isVisible());
 		}
@@ -127,5 +112,10 @@ public class PanelMain extends JPanel implements ActionListener {
 		JOptionPane.showMessageDialog(null, serieName, "test", JOptionPane.INFORMATION_MESSAGE);		
 	}
 
+
+	public void transferInfo(String nameSerie) {
+		SerieController ctrl = new SerieController();
+		setSerie(ctrl.getSerieByName(nameSerie));
+	}
 	
 }
