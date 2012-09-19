@@ -46,7 +46,7 @@ public class Season {
 		this.serie = serie;
 		this.num = num;
 	}
-	
+
 	public Season() {
 	}
 
@@ -74,9 +74,8 @@ public class Season {
 	public void deleteEpisode(Episode episode) {
 		episodes.remove(episode);
 	}
-
-	public ArrayList<Season> getAllSeason() {
-		ArrayList<Season> season = new ArrayList<>();
+	public ArrayList<String> getAllEpisodes() {
+		ArrayList<String> episodes = new ArrayList<>();
 		{
 			Document document = null;
 			Element racine;
@@ -118,13 +117,27 @@ public class Season {
 				while (s.hasNext()) {
 					// On parcourt toutes les saisons
 					Element saisonCourant = (Element) s.next();
-					// On affiche le résultat
-					System.out.println("Saison "
-							+ saisonCourant.getAttributeValue("numberS"));
+					// On crée une List contenant tous les noeuds "Episodes" de
+					// l'Element
+					// SaisonCourant
+					List listageEpisode = saisonCourant.getChildren("Episode");
+					// On crée un Iterator sur notre liste d'épisodes
+					Iterator e = listageEpisode.iterator();
+					while (e.hasNext()) {
+						// On parcourt toutes les épisodes
+						Element episodeCourant = (Element) e.next();
+						// On affiche le résultat
+						/*System.out.println("Episode "
+								+ episodeCourant.getAttributeValue("numberE")
+								+ ": " + episodeCourant.getValue());*/
+						episodes.add(episodeCourant.getAttributeValue("numberE"));
+					}
 				}
+				
 			}
+			System.out.println(episodes);
+			return episodes;
 		}
-		return season;
 	}
 
 }
