@@ -54,39 +54,6 @@ public class PanelMain extends JPanel implements ActionListener {
 
 		panelScrollpane.setLayout(new BoxLayout(panelScrollpane, BoxLayout.PAGE_AXIS));
 				
-		/*for (int i = 1; i <= serie.getAllSeason().size(); i++) {
-			JPanel panelSeason = new JPanel(new BorderLayout());
-			panelScrollpane.add(panelSeason);
-
-			JRadioButton season = new JRadioButton("Saison " + i);
-			season.setIcon(new Icon() {
-					public void paintIcon(Component c, Graphics g, int x, int y) {}
-					public int getIconWidth() { return 0; }
-					public int getIconHeight() { return 0; }
-				});
-			season.addActionListener(this);
-    	
-			panelSeason.add(season, BorderLayout.PAGE_START);
-
-			ArrayList<String> episodes = new ArrayList<String>();
-			episodes.add("1 - Les mutants juniors");
-			episodes.add("2 - Le retours des mutants juniors");
-			episodes.add("3 - La fin des mutants juniors");
-			episodes.add("4 - Les mutants séniors");
-			episodes.add("5 - Le retours des mutants séniors");
-			episodes.add("6 - La fin des mutants séniors");
-
-			DefaultListModel<String> listModel = new DefaultListModel<String>();
-			for (String episode : episodes) {
-				listModel.addElement(episode);
-			}
-			JList listEpisodes = new JList(listModel);
-
-			panelSeason.add(listEpisodes, BorderLayout.CENTER);
-			wSeasons.add(new SeasonField(season, listEpisodes));
-		}
-    	*/
-    	//Ajout des composants
     	add(wInfoBox, BorderLayout.PAGE_START);
     	add(scrollpane, BorderLayout.CENTER);
 	}
@@ -100,15 +67,14 @@ public class PanelMain extends JPanel implements ActionListener {
 		this.serie = serie;
 	}
 
-	
-	public void updateView(){
-		
+	public void updateView() {
 		this.wInfoBox.setText(this.serie.getName());
 		panelScrollpane.removeAll();
-		JPanel panelSeason = new JPanel(new BorderLayout());
-		panelScrollpane.add(panelSeason);
+		wSeasons.clear();
 
 		for (Season season : serie.getAllSeason()) {
+			JPanel panelSeason = new JPanel(new BorderLayout());
+			panelScrollpane.add(panelSeason);
 			
 			JRadioButton seasonLabel = new JRadioButton("Saison " + season.getNum());
 			seasonLabel.setIcon(new Icon() {
@@ -123,12 +89,12 @@ public class PanelMain extends JPanel implements ActionListener {
 			DefaultListModel<String> listModel = new DefaultListModel<String>();
 			for (Episode episode : season.getAllEpisodes()) {
 				listModel.addElement(episode.getName());
-		}
-		JList listEpisodes = new JList(listModel);
+			}
+			JList listEpisodes = new JList(listModel);
 
-		panelSeason.add(listEpisodes, BorderLayout.CENTER);
-		wSeasons.add(new SeasonField(seasonLabel, listEpisodes));
-	}
+			panelSeason.add(listEpisodes, BorderLayout.CENTER);
+			wSeasons.add(new SeasonField(seasonLabel, listEpisodes));
+		}
 	
 		this.updateUI();
 	}
