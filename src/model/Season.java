@@ -45,9 +45,11 @@ public class Season {
 	Season(Serie serie, int num) {
 		this.serie = serie;
 		this.num = num;
+		this.episodes = new ArrayList<Episode>();
 	}
 
 	public Season() {
+		this.episodes = new ArrayList<Episode>();
 	}
 
 	/**
@@ -74,6 +76,15 @@ public class Season {
 	public void deleteEpisode(Episode episode) {
 		episodes.remove(episode);
 	}
+
+	public String toString() {
+		String ret = "Saison " + num + "\n";
+		for (Episode episode : episodes) {
+			ret = ret + "\t\t" + episode + "\n";
+		}
+		return ret;
+	}
+
 	public ArrayList<String> getAllEpisodes() {
 		ArrayList<String> episodes = new ArrayList<>();
 		{
