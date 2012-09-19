@@ -22,11 +22,20 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 	private JButton boutonParam;
 	private JTextField boxSearch;;
 	
+	/**
+	 * Constructeur par défaut de Window
+	 * Affiche une toolbar et deux panel
+	 */
 	public Window() {
 		super("Ma fenÃªtre");
-
+		
+		/*Mise en page de la fenetre*/
 		setLayout(new BorderLayout());
 		Container pane = getContentPane();
+		setSize(500, 500);
+		setResizable(true);
+		setVisible(true);
+		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 
 		/* Toolbar */
 		toolbar = new JToolBar();
@@ -34,42 +43,48 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		boutonAjout = new JButton(add);
 		ImageIcon settings = new ImageIcon("./src/images/settings.png");
 		boutonParam = new JButton(settings);
-		boxSearch = new JTextField("Recherche...");
-		
+		boxSearch = new JTextField("Recherche...");	
 		toolbar.add(boutonAjout);
 		toolbar.add(boutonParam);
 		toolbar.add(boxSearch);
-		
 		boutonAjout.addActionListener(this);
 		boutonParam.addActionListener(this);
 		boxSearch.addKeyListener(this);
 
+		/* Panel de droite et de gauche */
 		PanelMain infoSerie = new PanelMain();
-		//Ajout des blocs
 		pane.add(toolbar, BorderLayout.PAGE_START);
 		pane.add(new PanelSerie(infoSerie), BorderLayout.LINE_START);
 		pane.add(infoSerie, BorderLayout.CENTER);
 
-		setSize(500, 500);
-		setResizable(true);
+		//Apparence visible
 		setVisible(true);
-		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 	}
 
 	@Override
+	/**
+	 * Listener sur les boutons de ToolBar
+	 * @param : un evenement action
+	 */
 	public void actionPerformed(ActionEvent e) {
+		/* Bouton ajout */
 		if(e.getSource() == boutonAjout){
 			JOptionPane.showMessageDialog(this, "Add", "Add", JOptionPane.WARNING_MESSAGE);
 		}else{
+			/* Bouton Paramètres */
 			if(e.getSource() == boutonParam){
 				SettingsFrame mesParams = new SettingsFrame();
 			} 
 		}	
 	}
 	
+	/**
+	 * Listener des touches de claviers
+	 * @param : un evenement touche
+	 */
 	public void keyPressed(KeyEvent e) 
 	{	
-		//
+		/* Touche 'ENTER' */
 		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{
 			//Valeur sur laquelle il faut executer la recherche.

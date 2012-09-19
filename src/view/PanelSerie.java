@@ -31,7 +31,6 @@ public class PanelSerie extends JPanel implements ListSelectionListener{
 		mesSeries.add("TBBT");
 		mesSeries.add("HIMYM");
 		mesSeries.add("The Simpsons");
-		
 			
 		//Passage par un defaultListModel
 		DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -50,9 +49,14 @@ public class PanelSerie extends JPanel implements ListSelectionListener{
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
+		System.err.println("Source : "+ e.getSource());
 		//Recuperer le nom de la serie choisie
 		String nameSerie = (String) (((JList) e.getSource()).getSelectedValue());
-		infoSerie.showInfoSerie(nameSerie);
+		System.out.println(nameSerie);
+
+		infoSerie.setSerieName(nameSerie);
+//		infoSerie.updateUI();
+		infoSerie.updateView();
 
 		}
 }

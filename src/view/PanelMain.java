@@ -31,6 +31,9 @@ import javax.swing.JTree;
 import javax.swing.ScrollPaneLayout;
 
 public class PanelMain extends JPanel implements ActionListener {
+	
+	private JLabel infoBox = new JLabel("Les Mutants");
+	
 	public class SeasonField {
 		public SeasonField(JRadioButton title, JList episodes) {
 			this.title = title;
@@ -40,18 +43,21 @@ public class PanelMain extends JPanel implements ActionListener {
 		public JList episodes;
 	}
 
+	private String serieName;
 	private ArrayList<SeasonField> seasons;
 	//private JList listEpisodes;
 
     public PanelMain() {
     	super();
     	setLayout(new BorderLayout());
-
+    	serieName = getSerieName();
+    	infoBox.setText(serieName);
+    	System.out.println("Panel Main" + serieName);
 		seasons = new ArrayList<SeasonField>();
 
     	//Recuperer les infos de la serie
 		//JLabel infoBox = new JLabel(serieCtrl.getInfo(););
-		JLabel infoBox = new JLabel("Les Mutants");
+		//JLabel infoBox = new JLabel("Les Mutants");
 
     	//Creation des scrollbar
 		JPanel panelScrollpane = new JPanel();
@@ -95,6 +101,21 @@ public class PanelMain extends JPanel implements ActionListener {
     	add(scrollpane, BorderLayout.CENTER);
 	}
 
+    /* GETTEURS ET SETTEURS */
+    public String getSerieName() {
+		return serieName;
+	}
+
+	public void setSerieName(String serieName) {
+		this.serieName = serieName;
+//		this.infoBox.setText(this.serieName);
+	}
+	
+	public void updateView(){
+		this.infoBox.setText(this.serieName);
+		this.updateUI();
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		for (SeasonField season : seasons) {
 			if (e.getSource() == season.title)
@@ -105,4 +126,6 @@ public class PanelMain extends JPanel implements ActionListener {
 	public void showInfoSerie(String serieName) {
 		JOptionPane.showMessageDialog(null, serieName, "test", JOptionPane.INFORMATION_MESSAGE);		
 	}
+
+	
 }
