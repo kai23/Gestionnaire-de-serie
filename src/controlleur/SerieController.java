@@ -107,7 +107,7 @@ public class SerieController {
 			String nouveau_nom = fichier_a_renommer.getParent() + "/"
 					+ renommage;
 
-			System.out.println(nomSerie + ext + "   ===>    " + renommage + " ?");
+			System.out.println(nomSerie + ext + "   ===>    " + renommage);
 			fichierRenommes.add(nouveau_nom);
 			// fichier_a_renommer.renameTo(new File(nouveau_nom));
 
@@ -115,12 +115,43 @@ public class SerieController {
 
 		System.out.println("Renommer l'ensemble ? O/N");
 		String choix = Clavier.lireString();
-		if (choix.equals('o')) {
+		if (choix.equals("O") || choix.equals("o")) {
 			int i = 0;
 			for (File fichier_a_renommer : listeFichier) {
-				System.out.println(fichierRenommes.get(i));
-				//fichier_a_renommer.renameTo(new File(fichierRenommes.get(i)));
+				fichier_a_renommer.renameTo(new File(fichierRenommes.get(i)));
 				i++;
+			}
+			System.out.println("Renommage réussi !");
+		}
+		else {
+			for (File fichier_a_renommer : listeFichier) {
+				// On récupère le nom du fichier à renommer
+				String nomSerie = fichier_a_renommer.getName();
+
+				// On récupère l'extension
+				String ext = fichier_a_renommer.getName().substring(
+						fichier_a_renommer.getName().lastIndexOf("."),
+						fichier_a_renommer.getName().length());
+
+				/* On cherche le nom de la série grace à notre super utilitaire ! */
+				ArrayList<String> episodeTrouve = this.trouverInfosSerie(nomSerie);
+
+				// Y'a plus qu'à ajouter au le renomage !
+				String renommage = episodeTrouve.get(0) + " S"
+						+ episodeTrouve.get(1) + "E" + episodeTrouve.get(2) + " - "
+						+ episodeTrouve.get(3) + ext;
+
+				String nouveau_nom = fichier_a_renommer.getParent() + "/"
+						+ renommage;
+
+				
+				System.out.println(nomSerie + ext + "   ===>    " + renommage + " ? O/N");
+				
+				if (Clavier.lireString().equals("O")) {
+					fichier_a_renommer.renameTo(new File(nouveau_nom));
+				}
+				
+
 			}
 		}
 
@@ -300,7 +331,7 @@ public class SerieController {
 	
 	
 	public Serie getSerieByName(String name) {
-		Serie serie = new Serie();
+		Serie serie = new Serie(0,"Pirates","Pirates des caraibes !");
 		//serie = serie.searchSerieByName(name);
 		return serie;
 	}
