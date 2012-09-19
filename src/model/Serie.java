@@ -1,5 +1,11 @@
 package model;
 
+import java.io.*;
+
+import org.jdom2.*;
+import org.jdom2.input.*;
+import org.jdom2.filter.*;
+import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
@@ -19,18 +25,23 @@ public class Serie {
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -38,13 +49,15 @@ public class Serie {
 	/**
 	 * Constructor
 	 */
-	
-	public Serie(){}
-	
+
+	public Serie() {
+	}
+
 	public Serie(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
+
 	public Serie(int id, String name, String description) {
 		this.id = id;
 		this.name = name;
@@ -57,12 +70,13 @@ public class Serie {
 	public Season addSeason(int num) {
 		if (getSeason(num) != null)
 			return null;
-		
+
 		Season season = new Season(this, num);
 		seasons.add(season);
-		
+
 		return season;
 	}
+
 	public Season getSeason(int num) {
 		for (Season season : seasons) {
 			if (season.getNum() == num)
@@ -71,19 +85,54 @@ public class Serie {
 
 		return null;
 	}
+
 	public void deleteSeason(Season season) {
 		seasons.remove(season);
 	}
-	
-	
+
 	public ArrayList<Serie> getAllSeries() {
 		ArrayList<Serie> series = new ArrayList<>();
-		
-		// Faire ici la fonction permettant de récupérer les séries dans le XML
-		
-		
+		{
+			Document document = null;
+			Element racine;
+
+			SAXBuilder sxb = new SAXBuilder();
+			try {
+				// On crée un nouveau document JDOM avec en argument le fichier
+				// XML
+				// Le parsing est terminé ;)
+				try {
+					document = sxb.build(new File(
+							"/home/florian/Bureau/BaseDeDonneeSerie.xml"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Ne trouve pas le fichier !");
+				}
+			} catch (JDOMException e) {
+			}
+
+			// On initialise un nouvel élément racine avec l'élément racine du
+			// document.
+			racine = document.getRootElement();
+			// On crée une List contenant tous les noeuds "Series" de l'Element
+			// racine
+			List listageSerie = racine.getChildren("Serie");
+
+			// On crée un Iterator sur notre liste de série
+			Iterator i = listageSerie.iterator();
+			while (i.hasNext()) {
+				// On parcourt toutes les séries
+				Element serieCourant = (Element) i.next();
+				// On affiche le résultat
+				System.out.println("Série: "
+						+ serieCourant.getAttributeValue("name") + "   |   "
+						+ "langue: " + serieCourant.getAttributeValue("lang")
+						+ "   |   " + "Emplacement: "
+						+ serieCourant.getAttributeValue("folder"));
+			}
+
+		}
 		return series;
-		
 	}
-	
 }
