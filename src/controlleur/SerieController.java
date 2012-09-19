@@ -64,15 +64,18 @@ public class SerieController {
 	 */
 
 	public ArrayList<String> getAllSerieName() {
-		Serie serie = new Serie();
+		Serie serie1 = new Serie(0,"FloDaBest", "Floooooo");
+		Serie serie2 = new Serie(0,"FloDaBest2", "Floooooo2");
+		Serie serie3 = new Serie(0,"FloDaBest3", "Floooooo3");
+		Serie serie4 = new Serie(0,"FloDaBest4", "Floooooo4");
 		ArrayList<String> listeNomSerie = new ArrayList<>();
-
+		
 		// On récupère toutes les séries
-		ArrayList<Serie> listeSerie = serie.getAllSeries();
+		listeNomSerie.add(serie1.getName());
+		listeNomSerie.add(serie2.getName());
+		listeNomSerie.add(serie3.getName());
+		listeNomSerie.add(serie4.getName());
 
-		for (Serie serie2 : listeSerie) {
-			listeNomSerie.add(serie2.getName());
-		}
 
 		return listeNomSerie;
 	}

@@ -22,6 +22,7 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 	private JToolBar toolbar;
 	private JButton boutonAjout;
 	private JButton boutonParam;
+	private JButton boutonSuppr;
 	private JTextField boxSearch;;
 	
 	/**
@@ -43,13 +44,17 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		toolbar = new JToolBar();
 		ImageIcon add = new ImageIcon("./src/images/ajouter.png");
 		boutonAjout = new JButton(add);
+		ImageIcon delete = new ImageIcon("./src/images/supprimer.png");
+		boutonSuppr = new JButton(delete);
 		ImageIcon settings = new ImageIcon("./src/images/settings.png");
 		boutonParam = new JButton(settings);
 		boxSearch = new JTextField("Recherche...");	
 		toolbar.add(boutonAjout);
+		toolbar.add(boutonSuppr);
 		toolbar.add(boutonParam);
 		toolbar.add(boxSearch);
 		boutonAjout.addActionListener(this);
+		boutonSuppr.addActionListener(this);
 		boutonParam.addActionListener(this);
 		boxSearch.addKeyListener(this);
 
@@ -72,14 +77,18 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent e) {
 		/* Bouton ajout */
 		if(e.getSource() == boutonAjout){
-			JOptionPane.showMessageDialog(this, "Add", "Add", JOptionPane.WARNING_MESSAGE);
-		}else{
+			AddSerieFrame mesAjouts = new AddSerieFrame();
+		}else
+			/* Bouton supprimer */
+			if(e.getSource() == boutonSuppr){
+				DeleteSerieFrame mesSuppressions = new DeleteSerieFrame();
+			} else 
 			/* Bouton Parametres */
 			if(e.getSource() == boutonParam){
 				SettingsFrame mesParams = new SettingsFrame();
 			} 
 		}	
-	}
+	
 	
 	/**
 	 * Listener des touches de claviers

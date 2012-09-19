@@ -23,16 +23,8 @@ public class PanelSerie extends JPanel implements ListSelectionListener{
 		setLayout(new BorderLayout());
 
 		//Recuperation des noms de series
-		ArrayList<String> mesSeries = new ArrayList<String>();
-		/*SerieController ctrl = new SerieController();
-		mesSeries = ctrl.getAllSerieName();*/
-		
-		//Arraylist temporaire
-		mesSeries.add("Malcom");
-		mesSeries.add("TBBT");
-		mesSeries.add("HIMYM");
-		mesSeries.add("The Simpsons");
-		mesSeries.add("Ça c'est de l'erreur qui tue et qui a un nom a dormir debout");
+		SerieController ctrl = new SerieController();
+		ArrayList<String> mesSeries = ctrl.getAllSerieName();
 			
 		//Passage par un defaultListModel
 		listModel = new DefaultListModel<>();
