@@ -21,7 +21,8 @@ class AddSerieFrame extends JFrame implements ActionListener {
 		super("Ajouter une série à la collection");
 		setLayout(new BorderLayout());
 		Container pane = getContentPane();
-		setSize(new Dimension(200, 200));
+		setSize(new Dimension(300, 300));
+		setResizable(false);
 		setVisible(true);
 		
 		//Panel d'ajout 
