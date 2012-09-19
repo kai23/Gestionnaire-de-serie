@@ -2,7 +2,7 @@
 <!-- Time-stamp: "BaseDeDonne.xml   17 Sept 2012 15:24:04" -->
 <!DOCTYPE BaseDeDonneeSerie SYSTEM "BaseDeDonneeSerie.dtd" >
 <BaseDeDonneeSerie>
-  <Serie name="Malcom" lang="fr" folder="/home/florian/Serie/Malcom">
+  <Serie name="Malcom" id="1" lang="fr" folder="/home/florian/Serie/Malcom">
 	<Saison numberS="1" name="Saison 1">
 		<Episode numberE ="1">Je ne suis pas un monstre</Episode>
 		<Episode numberE ="2">Alerte rouge</Episode>
@@ -43,26 +43,26 @@
 		<Episode numberE ="11">Pique-nique fatal</Episode>
 	</Saison>
   </Serie>
-  <Serie name="NCIS LA" lang="fr" folder="/home/florian/Serie/NCIS LA">
+  <Serie name="NCIS LA" id="2" lang="fr" folder="/home/florian/Serie/NCIS LA">
   </Serie>
-  <Serie name="NCIS" lang="fr" folder="/home/florian/Serie/NCIS">
+  <Serie name="NCIS" id="3" lang="fr" folder="/home/florian/Serie/NCIS">
   </Serie>
-  <Serie name="Hawaii 5-0" lang="fr" folder="/home/florian/Serie/Hawaii 5-0">
+  <Serie name="Hawaii 5-0" id="4" lang="fr" folder="/home/florian/Serie/Hawaii 5-0">
   </Serie>
-  <Serie name="Dr House" lang="fr" folder="/home/florian/Serie/Dr House">
+  <Serie name="Dr House" id="5" lang="fr" folder="/home/florian/Serie/Dr House">
   </Serie>
-  <Serie name="Homeland" lang="fr" folder="/home/florian/Serie/Homeland">
+  <Serie name="Homeland" id="6" lang="fr" folder="/home/florian/Serie/Homeland">
   </Serie>
-  <Serie name="Ma famille d'abord" lang="fr" folder="/home/florian/Serie/Ma famille d'abord">
+  <Serie name="Ma famille d'abord" id="7" lang="fr" folder="/home/florian/Serie/Ma famille d'abord">
   </Serie>
-  <Serie name="How I Met Your Mother" lang="fr" folder="/home/florian/Serie/How I Met Your Mother">
+  <Serie name="How I Met Your Mother" id="8" lang="fr" folder="/home/florian/Serie/How I Met Your Mother">
   </Serie>
-  <Serie name= "The Big Bang Theory" lang="fr" folder="/home/florian/Serie/The Big Bang Theory">
+  <Serie name= "The Big Bang Theory" id="9" lang="fr" folder="/home/florian/Serie/The Big Bang Theory">
   </Serie>
-  <Serie name="Dexter" lang="fr" folder="/home/florian/Serie/Dexter">
+  <Serie name="Dexter" lang="fr" id="10" folder="/home/florian/Serie/Dexter">
   </Serie>
-  <Serie name="Person of Interest" lang="fr" folder="/home/florian/Serie/Person of Interest">
+  <Serie name="Person of Interest" id="11" lang="fr" folder="/home/florian/Serie/Person of Interest">
   </Serie>
-  <Serie name="90210" lang="fr" folder="/home/florian/Serie/90210">
+  <Serie name="90210" lang="fr" id="12" folder="/home/florian/Serie/90210">
   </Serie>
 </BaseDeDonneeSerie>
