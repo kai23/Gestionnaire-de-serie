@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Time-stamp: "BaseDeDonne.xml   17 Sept 2012 15:24:04" -->
+<!DOCTYPE BaseDeDonneeSerie SYSTEM "BaseDeDonneeSerie.dtd" >
+<BaseDeDonneeSerie>
+  <Serie name="Malcom" lang="fr" folder="/home/florian/Serie/Malcom">
+	<Saison numberS="1" name="Saison 1">
+		<Episode numberE ="1">Je ne suis pas un monstre</Episode>
+		<Episode numberE ="2">Alerte rouge</Episode>
+		<Episode numberE ="3">Seuls a la maison</Episode>
+		<Episode numberE ="4">Honte</Episode>
+		<Episode numberE ="5">Changement de famille</Episode>
+		<Episode numberE ="6">Poquito Cabeza</Episode>
+		<Episode numberE ="7">La petite évasion</Episode>
+		<Episode numberE ="8">Panique au pique-nique</Episode>
+		<Episode numberE ="9">Ma mère, ce héros</Episode>
+		<Episode numberE ="10">À fond la caisse</Episode>
+		<Episode numberE ="11">Les funérailles</Episode>
+	</Saison>
+  </Serie>
+</BaseDeDonneeSerie>

@@ -93,7 +93,7 @@ public class Episode {
 				// Le parsing est terminé ;)
 				try {
 					document = sxb.build(new File(
-							"/home/florian/Bureau/BaseDeDonneeSerie.xml"));
+							"BaseDeDonneeSerie.xml"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
