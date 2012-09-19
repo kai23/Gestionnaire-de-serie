@@ -102,11 +102,14 @@ public class PanelMain extends JPanel implements ActionListener {
 
 	
 	public void updateView(){
+		
 		this.wInfoBox.setText(this.serie.getName());
-		for (Season season : serie.getAllSeason()) {
-			JPanel panelSeason = new JPanel(new BorderLayout());
-			panelScrollpane.add(panelSeason);
+		panelScrollpane.removeAll();
+		JPanel panelSeason = new JPanel(new BorderLayout());
+		panelScrollpane.add(panelSeason);
 
+		for (Season season : serie.getAllSeason()) {
+			
 			JRadioButton seasonLabel = new JRadioButton("Saison " + season.getNum());
 			seasonLabel.setIcon(new Icon() {
 					public void paintIcon(Component c, Graphics g, int x, int y) {}
