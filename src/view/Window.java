@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,12 +19,16 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.JFrame;
 
+import controlleur.SerieController;
+
+import model.Serie;
+
 public class Window extends JFrame implements ActionListener, KeyListener{
 	private JToolBar toolbar;
 	private JButton boutonAjout;
 	private JButton boutonParam;
-	private JButton boutonSuppr;
-	private JTextField boxSearch;;
+	private JTextField boxSearch;
+	private SerieController ctrl;
 	
 	/**
 	 * Constructeur par defaut de Window
@@ -31,7 +36,8 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 	 */
 	public Window() {
 		super("Ma fenêtre");
-		
+		ctrl = new SerieController();
+		ctrl.loadSeries("C:\\Users\\Sarah\\ING2\\Gestionnaire-de-serie\\BaseDeDonneeSerie.xml");
 		/*Mise en page de la fenetre*/
 		setLayout(new BorderLayout());
 		Container pane = getContentPane();
@@ -44,25 +50,21 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		toolbar = new JToolBar();
 		ImageIcon add = new ImageIcon("./src/images/ajouter.png");
 		boutonAjout = new JButton(add);
-		ImageIcon delete = new ImageIcon("./src/images/supprimer.png");
-		boutonSuppr = new JButton(delete);
 		ImageIcon settings = new ImageIcon("./src/images/settings.png");
 		boutonParam = new JButton(settings);
 		boxSearch = new JTextField("Recherche...");	
 		toolbar.add(boutonAjout);
-		toolbar.add(boutonSuppr);
 		toolbar.add(boutonParam);
 		toolbar.add(boxSearch);
 		boutonAjout.addActionListener(this);
-		boutonSuppr.addActionListener(this);
 		boutonParam.addActionListener(this);
 		boxSearch.addKeyListener(this);
 
 		/* Panel de droite et de gauche */
-		PanelMain infoSerie = new PanelMain();
+		PanelMain infoSerie = new PanelMain(ctrl);
 		pane.add(toolbar, BorderLayout.PAGE_START);
-		PanelSerie panelSeries = new PanelSerie(infoSerie);
-		pane.add(new PanelSerie(infoSerie), BorderLayout.LINE_START);
+		PanelSerie panelSeries = new PanelSerie(infoSerie, ctrl);
+		pane.add(panelSeries, BorderLayout.LINE_START);
 		pane.add(infoSerie, BorderLayout.CENTER);
 
 		//Apparence visible
@@ -78,11 +80,7 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		/* Bouton ajout */
 		if(e.getSource() == boutonAjout){
 			AddSerieFrame mesAjouts = new AddSerieFrame();
-		}else
-			/* Bouton supprimer */
-			if(e.getSource() == boutonSuppr){
-				DeleteSerieFrame mesSuppressions = new DeleteSerieFrame();
-			} else 
+		} else 
 			/* Bouton Parametres */
 			if(e.getSource() == boutonParam){
 				SettingsFrame mesParams = new SettingsFrame();

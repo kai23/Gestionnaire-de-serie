@@ -19,6 +19,8 @@ import javax.swing.JScrollPane;
 
 import controlleur.SerieController;
 
+import model.Episode;
+import model.Season;
 import model.Serie;
 
 public class PanelMain extends JPanel implements ActionListener {
@@ -36,19 +38,22 @@ public class PanelMain extends JPanel implements ActionListener {
 	}
 	private Serie serie;
 	private ArrayList<SeasonField> wSeasons;
+	private JPanel panelScrollpane;
+	private SerieController ctrl;
 
-    public PanelMain() {
+    public PanelMain(SerieController ctrl) {
     	super();
+    	this.ctrl = ctrl;
     	setLayout(new BorderLayout());
     	setSerie(getSerie());
 		wSeasons = new ArrayList<SeasonField>();
 
     	//Creation des scrollbar
-		JPanel panelScrollpane = new JPanel();
+		panelScrollpane = new JPanel();
 		JScrollPane scrollpane = new JScrollPane(panelScrollpane);
 
 		panelScrollpane.setLayout(new BoxLayout(panelScrollpane, BoxLayout.PAGE_AXIS));
-		
+				
 		/*for (int i = 1; i <= serie.getAllSeason().size(); i++) {
 			JPanel panelSeason = new JPanel(new BorderLayout());
 			panelScrollpane.add(panelSeason);
@@ -98,7 +103,30 @@ public class PanelMain extends JPanel implements ActionListener {
 	
 	public void updateView(){
 		this.wInfoBox.setText(this.serie.getName());
-		//this.wSeasons = this.serie.getAllSeason();
+		for (Season season : serie.getAllSeason()) {
+			JPanel panelSeason = new JPanel(new BorderLayout());
+			panelScrollpane.add(panelSeason);
+
+			JRadioButton seasonLabel = new JRadioButton("Saison " + season.getNum());
+			seasonLabel.setIcon(new Icon() {
+					public void paintIcon(Component c, Graphics g, int x, int y) {}
+					public int getIconWidth() { return 0; }
+					public int getIconHeight() { return 0; }
+				});
+			seasonLabel.addActionListener(this);
+		
+			panelSeason.add(seasonLabel, BorderLayout.PAGE_START);
+	
+			DefaultListModel<String> listModel = new DefaultListModel<String>();
+			for (Episode episode : season.getAllEpisodes()) {
+				listModel.addElement(episode.getName());
+		}
+		JList listEpisodes = new JList(listModel);
+
+		panelSeason.add(listEpisodes, BorderLayout.CENTER);
+		wSeasons.add(new SeasonField(seasonLabel, listEpisodes));
+	}
+	
 		this.updateUI();
 	}
 	
@@ -115,7 +143,6 @@ public class PanelMain extends JPanel implements ActionListener {
 
 
 	public void transferInfo(String nameSerie) {
-		SerieController ctrl = new SerieController();
 		setSerie(ctrl.getSerieByName(nameSerie));
 	}
 	

@@ -25,6 +25,17 @@ public class SerieController {
 	UtilitaireSerie utilitaireSerie = new UtilitaireSerie();
 	String apiKey = "6FB2F69F85316497";
 	Series serie;
+	ArrayList<Serie> maCollection = null;
+	
+	//Constructeur
+	
+	
+	/**
+	 * Chargement des series
+	 */
+	public void loadSeries (String url){
+		maCollection = Serie.getAllSeries(url);
+	}
 
 	/**
 	 * Fonction permettant de lister les différents fichiers des repertoires
@@ -65,19 +76,10 @@ public class SerieController {
 	 */
 
 	public ArrayList<String> getAllSerieName() {
-		Serie serie1 = new Serie(0,"FloDaBest", "Floooooo");
-		Serie serie2 = new Serie(0,"FloDaBest2", "Floooooo2");
-		Serie serie3 = new Serie(0,"FloDaBest3", "Floooooo3");
-		Serie serie4 = new Serie(0,"FloDaBest4", "Floooooo4");
-		ArrayList<String> listeNomSerie = new ArrayList<>();
-		
-		// On récupère toutes les séries
-		listeNomSerie.add(serie1.getName());
-		listeNomSerie.add(serie2.getName());
-		listeNomSerie.add(serie3.getName());
-		listeNomSerie.add(serie4.getName());
-
-
+		ArrayList<String> listeNomSerie = new ArrayList<String>();
+		for (Serie serie : maCollection) {
+			listeNomSerie.add(serie.getName());			
+		}
 		return listeNomSerie;
 	}
 
@@ -340,9 +342,12 @@ public class SerieController {
 		return serieRecherchee;
 	}
 	public Serie getSerieByName(String name) {
-		Serie serie = new Serie(0,"Pirates","Pirates des caraibes !");
-		//serie = serie.searchSerieByName(name);
-		return serie;
+		for (Serie serie : maCollection) {
+			if (serie.getName().equals(name)) {
+				return serie;
+			}
+		}
+		return null;
 	}
 
 }
