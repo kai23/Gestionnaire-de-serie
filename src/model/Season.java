@@ -12,18 +12,18 @@ public class Season {
 	/**
 	 * Attribute
 	 */
-	private int num;
+	private String num;
 	private Serie serie;
 	private ArrayList<Episode> episodes;
 
 	/**
 	 * Setter/Getter
 	 */
-	public int getNum() {
+	public String getNum() {
 		return num;
 	}
 
-	public void setNum(int num) {
+	public void setNum(String num) {
 		this.num = num;
 	}
 
@@ -38,7 +38,7 @@ public class Season {
 	/**
 	 * Constructor
 	 */
-	public Season(Serie serie, int num) {
+	public Season(Serie serie, String num) {
 		this.serie = serie;
 		this.num = num;
 		this.episodes = new ArrayList<Episode>();
@@ -51,7 +51,7 @@ public class Season {
 	/**
 	 * Methods
 	 */
-	public Episode addEpisode(String name, String uri, int num) {
+	public Episode addEpisode(String name, String uri, String num) {
 		if (getEpisode(num) != null)
 			return null;
 		Episode episode = new Episode(name, uri, num, this);
@@ -60,9 +60,9 @@ public class Season {
 		return episode;
 	}
 
-	public Episode getEpisode(int num) {
+	public Episode getEpisode(String num) {
 		for (Episode episode : episodes) {
-			if (episode.getNum() == num)
+			if (episode.getNum().equals(num))
 				return episode;
 		}
 

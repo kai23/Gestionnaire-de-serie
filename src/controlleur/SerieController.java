@@ -353,18 +353,11 @@ public class SerieController {
 
 	/**
 	 * Fonction permettant d'enregistrer dans le XML une série prise sur TvDB
-	 * @param serie
+	 * @param serie2
 	 * @return
 	 */
-	public boolean storeSerieXML(Series serie) {
-		ArrayList<Season> saisons = getNumberOfSeason(serie);
-		Serie serie1 = new Serie(
-				Integer.parseInt(serie.getSeriesId()),
-				serie.getSeriesName(),
-				saisons,
-				new model.Episode(),
-				serie.getOverview());
-		if (serie1.storeSerie()) {
+	public boolean storeSerieXML(Serie serie) {
+		if (serie.storeSerie()) {
 			return true;
 		}
 		else return false;
@@ -382,10 +375,10 @@ public class SerieController {
 		for (Episode episode : allEpisode) {
 			i = episode.getSeasonNumber();
 		}
-		Serie serieNousSerie = new Serie(Integer.parseInt(serie.getSeriesId()), serie.getSeriesName(), serie.getOverview());
+		Serie serieNousSerie = new Serie(serie.getSeriesId(), serie.getSeriesName(), serie.getOverview());
 		ArrayList<Season> saisons = new ArrayList<>();
 		for (int j = 0; j <= i; j++) {
-			saisons.add(new Season(serieNousSerie, j));
+			saisons.add(new Season(serieNousSerie, ""+j));
 		}
 		return saisons;
 		
