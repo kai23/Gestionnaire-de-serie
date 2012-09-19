@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import model.Season;
 import model.Serie;
 import com.moviejukebox.thetvdb.TheTVDB;
 import com.moviejukebox.thetvdb.model.Episode;
@@ -350,4 +351,44 @@ public class SerieController {
 		return null;
 	}
 
+	/**
+	 * Fonction permettant d'enregistrer dans le XML une série prise sur TvDB
+	 * @param serie
+	 * @return
+	 */
+	public boolean storeSerieXML(Series serie) {
+		ArrayList<Season> saisons = getNumberOfSeason(serie);
+		Serie serie1 = new Serie(
+				Integer.parseInt(serie.getSeriesId()),
+				serie.getSeriesName(),
+				saisons,
+				new model.Episode(),
+				serie.getOverview());
+		if (serie1.storeSerie()) {
+			return true;
+		}
+		else return false;
+	}
+	
+	/**
+	 * Fonction permettant de récupérer les saisons d'une série sur TvDB
+	 * @param serie
+	 * @return
+	 */
+	public ArrayList<Season> getNumberOfSeason(Series serie) {
+		TheTVDB tvdb = new TheTVDB(apiKey);
+		List<Episode> allEpisode = tvdb.getAllEpisodes(serie.getSeriesId(), "fr");
+		int i = 0;
+		for (Episode episode : allEpisode) {
+			i = episode.getSeasonNumber();
+		}
+		Serie serieNousSerie = new Serie(Integer.parseInt(serie.getSeriesId()), serie.getSeriesName(), serie.getOverview());
+		ArrayList<Season> saisons = new ArrayList<>();
+		for (int j = 0; j <= i; j++) {
+			saisons.add(new Season(serieNousSerie, j));
+		}
+		return saisons;
+		
+		
+	}
 }

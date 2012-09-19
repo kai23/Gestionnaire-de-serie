@@ -68,6 +68,16 @@ public class Serie {
 		this.seasons = new ArrayList<Season>();
 	}
 
+	public Serie(int id, String name, ArrayList<Season> seasons,
+			Episode currentEpisode, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.seasons = seasons;
+		this.currentEpisode = currentEpisode;
+		this.description = description;
+	}
+
 	/**
 	 * Methods
 	 */
@@ -171,5 +181,18 @@ public class Serie {
 		}
 		System.out.println(series);
 		return series;
+	}
+
+	public boolean storeSerie() {
+		String xml = "BaseDeDonneeSerie.xml";
+		
+		// TODO Faire une fonction écrivant à la fin du fichier XML
+		
+		return false;
+	}
+
+	public static int getLastId() {
+		// TODO Faire une fonction qui retourne le dernier ID de série
+		return 0;
 	}
 }

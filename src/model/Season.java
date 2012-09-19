@@ -38,7 +38,7 @@ public class Season {
 	/**
 	 * Constructor
 	 */
-	Season(Serie serie, int num) {
+	public Season(Serie serie, int num) {
 		this.serie = serie;
 		this.num = num;
 		this.episodes = new ArrayList<Episode>();
