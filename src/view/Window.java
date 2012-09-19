@@ -1,6 +1,8 @@
 package view;
 
 
+import java.awt.Dimension;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.TextArea;
@@ -23,7 +25,7 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 	private JTextField boxSearch;;
 	
 	/**
-	 * Constructeur par défaut de Window
+	 * Constructeur par defaut de Window
 	 * Affiche une toolbar et deux panel
 	 */
 	public Window() {
@@ -54,6 +56,7 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		/* Panel de droite et de gauche */
 		PanelMain infoSerie = new PanelMain();
 		pane.add(toolbar, BorderLayout.PAGE_START);
+		PanelSerie panelSeries = new PanelSerie(infoSerie);
 		pane.add(new PanelSerie(infoSerie), BorderLayout.LINE_START);
 		pane.add(infoSerie, BorderLayout.CENTER);
 
@@ -71,7 +74,7 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		if(e.getSource() == boutonAjout){
 			JOptionPane.showMessageDialog(this, "Add", "Add", JOptionPane.WARNING_MESSAGE);
 		}else{
-			/* Bouton Paramètres */
+			/* Bouton Parametres */
 			if(e.getSource() == boutonParam){
 				SettingsFrame mesParams = new SettingsFrame();
 			} 
