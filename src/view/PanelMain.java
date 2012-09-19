@@ -48,7 +48,8 @@ public class PanelMain extends JPanel implements ActionListener {
 		JScrollPane scrollpane = new JScrollPane(panelScrollpane);
 
 		panelScrollpane.setLayout(new BoxLayout(panelScrollpane, BoxLayout.PAGE_AXIS));
-		/*for (int i = 1; i <= serie.getAllSeasons().size(); i++) {
+		
+		/*for (int i = 1; i <= serie.getAllSeason().size(); i++) {
 			JPanel panelSeason = new JPanel(new BorderLayout());
 			panelScrollpane.add(panelSeason);
 
@@ -78,8 +79,8 @@ public class PanelMain extends JPanel implements ActionListener {
 
 			panelSeason.add(listEpisodes, BorderLayout.CENTER);
 			wSeasons.add(new SeasonField(season, listEpisodes));
-		}*/
-    	
+		}
+    	*/
     	//Ajout des composants
     	add(wInfoBox, BorderLayout.PAGE_START);
     	add(scrollpane, BorderLayout.CENTER);
