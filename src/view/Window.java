@@ -72,7 +72,7 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent e) {
 		/* Bouton ajout */
 		if(e.getSource() == boutonAjout){
-			JOptionPane.showMessageDialog(this, "Add", "Add", JOptionPane.WARNING_MESSAGE);
+			AddSerieFrame mesAjouts = new AddSerieFrame();
 		}else{
 			/* Bouton Parametres */
 			if(e.getSource() == boutonParam){
