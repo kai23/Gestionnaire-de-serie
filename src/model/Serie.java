@@ -90,8 +90,8 @@ public class Serie {
 		seasons.remove(season);
 	}
 
-	public ArrayList<Serie> getAllSeries() {
-		ArrayList<Serie> series = new ArrayList<>();
+	public ArrayList<String> getAllSeason() {
+		ArrayList<String> season = new ArrayList<>();
 		{
 			Document document = null;
 			Element racine;
@@ -102,8 +102,60 @@ public class Serie {
 				// XML
 				// Le parsing est terminé ;)
 				try {
-					document = sxb.build(new File(
-							"BaseDeDonneeSerie.xml"));
+					document = sxb.build(new File("BaseDeDonneeSerie.xml"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Ne trouve pas le fichier !");
+				}
+			} catch (JDOMException e) {
+			}
+
+			// On initialise un nouvel élément racine avec l'élément racine du
+			// document.
+			racine = document.getRootElement();
+			// On crée une List contenant tous les noeuds "Series" de l'Element
+			// racine
+			List listageSerie = racine.getChildren("Serie");
+
+			// On crée un Iterator sur notre liste de série
+			Iterator i = listageSerie.iterator();
+			while (i.hasNext()) {
+				// On parcourt toutes les séries
+				Element serieCourant = (Element) i.next();
+				// On crée une List contenant tous les noeuds "Saisons" de
+				// l'Element
+				// SerieCourant
+				List listageSaison = serieCourant.getChildren("Saison");
+				// On crée un Iterator sur notre liste de saison
+				Iterator s = listageSaison.iterator();
+				while (s.hasNext()) {
+					// On parcourt toutes les saisons
+					Element saisonCourant = (Element) s.next();
+					// On affiche le résultat
+					/*System.out.println("Saison "
+							+ saisonCourant.getAttributeValue("numberS"));*/
+					season.add(saisonCourant.getAttributeValue("numberS"));
+				}
+			}
+			System.out.println(season);
+		}
+		return season;
+	}
+	
+	public ArrayList<String> getAllSeries() {
+		ArrayList<String> series = new ArrayList<>();
+		{
+			Document document = null;
+			Element racine;
+
+			SAXBuilder sxb = new SAXBuilder();
+			try {
+				// On crée un nouveau document JDOM avec en argument le fichier
+				// XML
+				// Le parsing est terminé ;)
+				try {
+					document = sxb.build(new File("BaseDeDonneeSerie.xml"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -125,14 +177,19 @@ public class Serie {
 				// On parcourt toutes les séries
 				Element serieCourant = (Element) i.next();
 				// On affiche le résultat
-				System.out.println("Série: "
-						+ serieCourant.getAttributeValue("name") + "   |   "
-						+ "langue: " + serieCourant.getAttributeValue("lang")
-						+ "   |   " + "Emplacement: "
-						+ serieCourant.getAttributeValue("folder"));
-			}
+				/*
+				 * System.out.println("Série: " +
+				 * serieCourant.getAttributeValue("name") + "   |   " +
+				 * "langue: " + serieCourant.getAttributeValue("lang") +
+				 * "   |   " + "Emplacement: " +
+				 * serieCourant.getAttributeValue("folder"));
+				 */
+				series.add(serieCourant.getAttributeValue("name"));
 
+			}
+			System.out.println(series);
 		}
 		return series;
+
 	}
 }
