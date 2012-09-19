@@ -24,10 +24,12 @@ public class SerieController {
 	UtilitaireSerie utilitaireSerie = new UtilitaireSerie();
 	String apiKey = "6FB2F69F85316497";
 
-	/**
-	 * @param args
-	 */
 
+	/**
+	 * Fonction permettant de lister les différents fichiers des repertoires
+	 * @param dir : Le repertoire choisi
+	 * @return un tableau de fichiers
+	 */
 	public ArrayList<File> listDirectory(String dir) {
 		File file = new File(dir);
 		File[] files = file.listFiles();
@@ -52,7 +54,12 @@ public class SerieController {
 		return listeFichier;
 
 	}
-
+	
+	/**
+	 * Fonction permettant de récupérer tous les noms de série
+	 * @return un tableau avec les nom des séries
+	 */
+	
 	public ArrayList<String> getAllSerieName() {
 		Serie serie = new Serie();
 		ArrayList<String> listeNomSerie = new ArrayList<>();
@@ -67,6 +74,10 @@ public class SerieController {
 		return listeNomSerie;
 	}
 
+	/**
+	 * Fonction permettant de renommer un fichier
+	 * @param fichier_a_renommer : le fichier... à renommer !
+	 */
 	public void renameEpisode(File fichier_a_renommer) {
 
 		// On récupère le nom du fichier à renommer
@@ -105,6 +116,17 @@ public class SerieController {
 
 	}
 
+	/**
+	 * Fonctioner permettant de trouver le nom d'une série
+	 * @param nomSerie : le nom "brut" de la série à renommer
+	 * @return Un tableau contenant :
+	 * <ul>
+	 * 	<li> Le nom de la série </li>
+	 * 	<li> Le numéro de la saison </li>
+	 * 	<li> Le numéro de l'épisode </li>
+	 * 	<li> Le nom de l'épisode </li>
+	 * </ul>
+	 */
 	public ArrayList<Object> trouverNomSerie(String nomSerie) {
 
 		// Les variables dont on aura besoin
@@ -202,6 +224,11 @@ public class SerieController {
 
 	}
 
+	/**
+	 * Fonction permettant de récupérer l'ID d'une serie par son nom
+	 * @param nomSerie : le nom de la série
+	 * @return l'ID de la série
+	 */
 	public int getSerieIDbyName(String nomSerie) {
 		int idSerie = 0;
 
