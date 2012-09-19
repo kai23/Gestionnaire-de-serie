@@ -1,0 +1,3 @@
+class AddSerieFrame extends JFrame {
+	
+}
