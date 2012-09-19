@@ -53,12 +53,11 @@ public class PanelSerie extends JPanel implements ListSelectionListener{
 	public void valueChanged(ListSelectionEvent e) {
 		//Recuperer le nom de la serie choisie
 		String nameSerie = (String) (((JList) e.getSource()).getSelectedValue());
-		System.out.println(nameSerie);
 
-		infoSerie.setSerieName(nameSerie);
+		infoSerie.transferInfo(nameSerie);
 		infoSerie.updateView();
-
-		}
+		
+	}
 
 	private void addSerie(String name) {
 		listModel.addElement(name);
