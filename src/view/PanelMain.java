@@ -31,10 +31,24 @@ import javax.swing.JTree;
 import javax.swing.ScrollPaneLayout;
 
 public class PanelMain extends JPanel implements ActionListener {
+	public class SeasonField {
+		public SeasonField(JRadioButton title, JList episodes) {
+			this.title = title;
+			this.episodes = episodes;
+		}
+		public JRadioButton title;
+		public JList episodes;
+	}
+
+	private ArrayList<SeasonField> seasons;
+	//private JList listEpisodes;
+
     public PanelMain() {
     	super();
     	setLayout(new BorderLayout());
-    	
+
+		seasons = new ArrayList<SeasonField>();
+
     	//Recuperer les infos de la serie
 		//JLabel infoBox = new JLabel(serieCtrl.getInfo(););
 		JLabel infoBox = new JLabel("Les Mutants");
@@ -48,15 +62,15 @@ public class PanelMain extends JPanel implements ActionListener {
 			JPanel panelSeason = new JPanel(new BorderLayout());
 			panelScrollpane.add(panelSeason);
 
-			JRadioButton anonyme = new JRadioButton("Saison " + i);
-			anonyme.setIcon(new Icon() {
+			JRadioButton season = new JRadioButton("Saison " + i);
+			season.setIcon(new Icon() {
 					public void paintIcon(Component c, Graphics g, int x, int y) {}
 					public int getIconWidth() { return 0; }
 					public int getIconHeight() { return 0; }
 				});
-			anonyme.addActionListener(this);
+			season.addActionListener(this);
     	
-			panelSeason.add(anonyme, BorderLayout.PAGE_START);
+			panelSeason.add(season, BorderLayout.PAGE_START);
 
 			ArrayList<String> episodes = new ArrayList<String>();
 			episodes.add("1 - Les mutants juniors");
@@ -73,6 +87,7 @@ public class PanelMain extends JPanel implements ActionListener {
 			JList listEpisodes = new JList(listModel);
 
 			panelSeason.add(listEpisodes, BorderLayout.CENTER);
+			seasons.add(new SeasonField(season, listEpisodes));
 		}
     	
     	//Ajout des composants
@@ -81,10 +96,13 @@ public class PanelMain extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(null , "test" , "C'est qui le plus fort" , JOptionPane.INFORMATION_MESSAGE);
+		for (SeasonField season : seasons) {
+			if (e.getSource() == season.title)
+				season.episodes.setVisible(!season.episodes.isVisible());
+		}
 	}
 
 	public void showInfoSerie(String serieName) {
-		JOptionPane.showMessageDialog(null, "test", serieName, JOptionPane.INFORMATION_MESSAGE);		
+		JOptionPane.showMessageDialog(null, serieName, "test", JOptionPane.INFORMATION_MESSAGE);		
 	}
 }
