@@ -96,9 +96,8 @@ public class Season {
 	}
 
 	public Element store() {
-		Element season = new Element("Season");
-		season.setAttribute(new Attribute("numbers", num));
-		season.setAttribute(new Attribute("name", "Saison " + num));
+		Element season = new Element("Saison");
+		season.setAttribute(new Attribute("numberS", num));
 
 		for (Episode episode : episodes) {
 			season.addContent(episode.store());
