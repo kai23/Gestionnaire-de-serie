@@ -12,7 +12,7 @@ public class Episode {
 	 */
 	private String name;
 	private String uri;
-	private int num;
+	private String num;
 	private boolean isWatched;
 	private Season season;
 
@@ -35,11 +35,11 @@ public class Episode {
 		this.uri = uri;
 	}
 
-	public int getNum() {
+	public String getNum() {
 		return num;
 	}
 
-	public void setNum(int num) {
+	public void setNum(String num) {
 		this.num = num;
 	}
 
@@ -62,7 +62,7 @@ public class Episode {
 	/**
 	 * Constructor
 	 */
-	Episode(String name, String uri, int num, Season season) {
+	Episode(String name, String uri, String num, Season season) {
 		this.name = name;
 		this.uri = uri;
 		this.num = num;
