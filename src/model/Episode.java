@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.jdom2.*;
+import org.jdom2.input.*;
+import org.jdom2.output.XMLOutputter;
+import org.jdom2.filter.*;
+
 public class Episode {
 	/**
 	 * Attribute
@@ -79,5 +84,13 @@ public class Episode {
 
 	public String toString() {
 		return "" + num + " " + name + " (" + uri + ")";
+	}
+
+	public Element store() {
+		Element episodeElement = new Element("Episode");
+		episodeElement.setAttribute(new Attribute("numberE", num));
+		episodeElement.setText(name);
+
+		return episodeElement;
 	}
 }

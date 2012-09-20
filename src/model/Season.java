@@ -8,6 +8,11 @@ import java.util.List;
 
 import java.util.ArrayList;
 
+import org.jdom2.*;
+import org.jdom2.input.*;
+import org.jdom2.output.XMLOutputter;
+import org.jdom2.filter.*;
+
 public class Season {
 	/**
 	 * Attribute
@@ -90,4 +95,15 @@ public class Season {
 		return this.episodes;
 	}
 
+	public Element store() {
+		Element season = new Element("Season");
+		season.setAttribute(new Attribute("numbers", num));
+		season.setAttribute(new Attribute("name", "Saison " + num));
+
+		for (Episode episode : episodes) {
+			season.addContent(episode.store());
+		}
+
+		return season;
+	}
 }
