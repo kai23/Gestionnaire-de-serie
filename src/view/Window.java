@@ -22,6 +22,7 @@ import javax.swing.JFrame;
 import controlleur.SerieController;
 
 import model.Serie;
+import model.Season;
 
 public class Window extends JFrame implements ActionListener, KeyListener{
 	private JToolBar toolbar;
@@ -38,6 +39,23 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		super("Ma fenêtre");
 		ctrl = new SerieController();
 		ctrl.loadSeries("BaseDeDonneeSerie.xml");
+		
+
+		Serie serie = new Serie();
+		Season saison1 = new Season(serie, "1");
+		Season saison2 = new Season(serie,"2");
+		ArrayList<Season> saisons = new ArrayList<>();
+		saisons.add(saison1);
+		saisons.add(saison2);
+		serie.setDescription("blabla");
+		serie.setId("120");
+		serie.setName("Flo à Miami");
+		serie.setSeasons(saisons);
+		serie.setFolder("/home/kai");
+		ctrl.storeSerieXML();
+
+
+
 		/*Mise en page de la fenetre*/
 		setLayout(new BorderLayout());
 		Container pane = getContentPane();
