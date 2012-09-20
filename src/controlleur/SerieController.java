@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package controlleur;
 
 import org.apache.log4j.*;
@@ -740,4 +739,4 @@ public class SerieController {
 		
 	}
 }
->>>>>>> 9b54d44427ac5ca7cba7c775a98a4c8640a59f06
+
