@@ -59,6 +59,11 @@ public class Season {
 
 		return episode;
 	}
+	
+	public Episode addEpisode(Episode episode) {
+		episodes.add(episode);
+		return episode;
+	}
 
 	public Episode getEpisode(String num) {
 		for (Episode episode : episodes) {
@@ -82,7 +87,7 @@ public class Season {
 	}
 
 	public ArrayList<Episode> getAllEpisodes() {
-		return episodes;
+		return this.episodes;
 	}
 
 }

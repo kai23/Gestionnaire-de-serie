@@ -4,12 +4,16 @@ import java.io.*;
 
 import org.jdom2.*;
 import org.jdom2.input.*;
+import org.jdom2.output.XMLOutputter;
 import org.jdom2.filter.*;
+
+import java.text.Format;
 import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-public class Serie {
+public class Serie
+{
 	/**
 	 * Attribute
 	 */
@@ -20,38 +24,51 @@ public class Serie {
 	private String description;
 	private String folder;
 
-	public String getFolder() {
+	// Pour le XML
+	org.jdom2.Document document;
+	Element racine;
+	String xml = "BaseDeDonneeSerie.xml";
+
+	public String getFolder()
+	{
 		return folder;
 	}
 
-	public void setFolder(String folder) {
+	public void setFolder(String folder)
+	{
 		this.folder = folder;
 	}
 
 	/**
 	 * Setter/Getter
 	 */
-	public String getId() {
+	public String getId()
+	{
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String id)
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public String getDescription() {
+	public String getDescription()
+	{
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
@@ -59,25 +76,28 @@ public class Serie {
 	 * Constructor
 	 */
 
-	public Serie() {
+	public Serie()
+	{
 		this.seasons = new ArrayList<Season>();
 	}
 
-	public Serie(String id, String name) {
+	public Serie(String id, String name)
+	{
 		this.id = id;
 		this.name = name;
 		this.seasons = new ArrayList<Season>();
 	}
 
-	public Serie(String id, String name, String description) {
+	public Serie(String id, String name, String description)
+	{
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.seasons = new ArrayList<Season>();
 	}
 
-	public Serie(String id, String name, ArrayList<Season> seasons,
-			Episode currentEpisode, String description) {
+	public Serie(String id, String name, ArrayList<Season> seasons, Episode currentEpisode, String description)
+	{
 		super();
 		this.id = id;
 		this.name = name;
@@ -89,13 +109,14 @@ public class Serie {
 	/**
 	 * Methods
 	 */
-	public void addSeason(Season season) {
+	public void addSeason(Season season)
+	{
 		seasons.add(season);
 	}
 
-	public Season addSeason(String num) {
-		if (getSeason(num) != null)
-			return null;
+	public Season addSeason(String num)
+	{
+		if (getSeason(num) != null) return null;
 
 		Season season = new Season(this, num);
 		seasons.add(season);
@@ -103,24 +124,27 @@ public class Serie {
 		return season;
 	}
 
-	public Season getSeason(String num) {
+	public Season getSeason(String num)
+	{
 		for (Season season : seasons) {
-			if (season.getNum() == num)
-				return season;
+			if (season.getNum() == num) return season;
 		}
 
 		return null;
 	}
 
-	public void deleteSeason(Season season) {
+	public void deleteSeason(Season season)
+	{
 		seasons.remove(season);
 	}
 
-	public ArrayList<Season> getAllSeason() {
+	public ArrayList<Season> getAllSeason()
+	{
 		return seasons;
 	}
 
-	public String toString() {
+	public String toString()
+	{
 		String ret = name + " " + id + "\n";
 		for (Season season : seasons) {
 			ret = ret + "\t" + season + "\n";
@@ -128,7 +152,29 @@ public class Serie {
 		return ret;
 	}
 
-	public static ArrayList<Serie> getAllSeries(String file) {
+	// /////////////////////////////////////////////////////////////////////////////////////////////////////////:
+
+	/**
+	 * Fonction permettant de lire un fichier XML
+	 * 
+	 * @param fichier
+	 * @throws Exception
+	 */
+	void lireFichier(String fichier) throws Exception
+	{
+		SAXBuilder sxb = new SAXBuilder();
+		document = sxb.build(new File(fichier));
+		racine = document.getRootElement();
+	}
+
+	/**
+	 * Fonction permettant de récupérer toutes les séries
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public static ArrayList<Serie> getAllSeries(String file)
+	{
 		ArrayList<Serie> series = new ArrayList<Serie>();
 
 		Document document = null;
@@ -140,12 +186,14 @@ public class Serie {
 			// Le parsing est terminé ;)
 			try {
 				document = sxb.build(new File(file));
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				System.out.println("Ne trouve pas le fichier !");
 			}
-		} catch (JDOMException e) {
+		}
+		catch (JDOMException e) {
 		}
 
 		// On initialise un nouvel élément racine avec l'élément racine du
@@ -161,22 +209,19 @@ public class Serie {
 			// On parcourt toutes les séries
 			Element serieCourant = (Element) i.next();
 
-			Serie serie = new Serie(serieCourant.getAttributeValue("id"),
-					serieCourant.getAttributeValue("name"));
+			Serie serie = new Serie(serieCourant.getAttributeValue("id"), serieCourant.getAttributeValue("name"));
 
 			List seasonNodes = serieCourant.getChildren("Saison");
 			for (Object seasonObject : seasonNodes) {
 				Element seasonNode = (Element) seasonObject;
 
-				Season season = new Season(serie,
-						seasonNode.getAttributeValue("numberS"));
+				Season season = new Season(serie, seasonNode.getAttributeValue("numberS"));
 
 				List episodeNodes = seasonNode.getChildren("Episode");
 				for (Object episodeObject : episodeNodes) {
 					Element episodeNode = (Element) episodeObject;
 
-					season.addEpisode(episodeNode.getValue(), "/",
-							episodeNode.getAttributeValue("numberE"));
+					season.addEpisode(episodeNode.getValue(), "/", episodeNode.getAttributeValue("numberE"));
 
 				}
 				serie.addSeason(season);
@@ -190,75 +235,83 @@ public class Serie {
 		return series;
 	}
 
-	public boolean storeSerie() {
-		File xml = new File("BaseDeDonneeSerie.xml");
-		// Nous allons commencer notre arborescence en créant la racine XML
-		// qui sera ici "personnes".
-		Element racine = new Element("BaseDeDonneeSerie");
-		Document document  = new Document();
-		SAXBuilder sxb = new SAXBuilder();
-
+	/**
+	 * Fonction permettant d'enregistrer un fichier XML
+	 * 
+	 * @return true ou false, si ça a réussi ou pas
+	 */
+	public Element storeSerie()
+	{
 		try {
-			// On crée un nouveau document JDOM avec en argument le fichier
-			// XML
-			// Le parsing est terminé ;)
-			try {
-				document = sxb.build(xml);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("Ne trouve pas le fichier !");
-			}
-		} catch (JDOMException e) {
+			this.lireFichier(xml);
+		}
+		catch (Exception e) {
+			System.out.println("Probleme de fichier");
 		}
 
-		// On initialise un nouvel élément racine avec l'élément racine du
-		// document.
 		// On crée l'élement Série
 		Element serie = new Element("Serie");
 		serie.setAttribute(new Attribute("name", this.getName()));
 		serie.setAttribute(new Attribute("id", this.id));
 		serie.setAttribute(new Attribute("lang", "fr"));
 		serie.setAttribute(new Attribute("folder", this.folder));
-		racine.addContent(serie);
-		for (Season saison : seasons) {
+		this.racine.addContent(serie);
+
+		for (Season saison : this.seasons) {
 			Element season = new Element("Season");
 			season.setAttribute(new Attribute("numbers", saison.getNum()));
-			season.setAttribute(new Attribute("name", "Saison "
-					+ saison.getNum()));
-			ArrayList<Episode> episodes = new ArrayList<>();
-			episodes = saison.getAllEpisodes();
-			
+			season.setAttribute(new Attribute("name", "Saison " + saison.getNum()));
+			ArrayList<Episode> episodes = saison.getAllEpisodes();
+
 			serie.addContent(season);
 			for (Episode episode : episodes) {
+				System.out.println(episode.getName());
 				Element episodeElement = new Element("Episode");
-				episodeElement.setAttribute(new Attribute("numberE", episode
-						.getNum()));
+				episodeElement.setAttribute(new Attribute("numberE", episode.getNum()));
 				episodeElement.setText(episode.getName());
 				season.addContent(episodeElement);
 			}
 		}
-		return true;
+		try {
+			this.enregistreFichier(this.xml);
+		}
+		catch (Exception e) {
+			System.out.println("Impossible d'enregistrer le fichier");
+		}
+		return serie;
 	}
 
-	public ArrayList<Season> getSeasons() {
+	public ArrayList<Season> getSeasons()
+	{
 		return seasons;
 	}
 
-	public void setSeasons(ArrayList<Season> seasons) {
+	public void setSeasons(ArrayList<Season> seasons)
+	{
 		this.seasons = seasons;
 	}
 
-	public Episode getCurrentEpisode() {
+	public Episode getCurrentEpisode()
+	{
 		return currentEpisode;
 	}
 
-	public void setCurrentEpisode(Episode currentEpisode) {
+	public void setCurrentEpisode(Episode currentEpisode)
+	{
 		this.currentEpisode = currentEpisode;
 	}
 
-	public static int getLastId() {
+	public static int getLastId()
+	{
 		// TODO Faire une fonction qui retourne le dernier ID de série
 		return 0;
+	}
+
+	// On enregsitre notre nouvelle arborescence dans le fichier
+	// d'origine dans un format classique.
+	public void enregistreFichier(String fichier) throws Exception
+	{
+		XMLOutputter sortie = new XMLOutputter(org.jdom2.output.Format.getPrettyFormat());
+		sortie.output(this.document, new FileOutputStream(fichier));
 	}
 }

@@ -1,68 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Time-stamp: "BaseDeDonne.xml   17 Sept 2012 15:24:04" -->
-<!DOCTYPE BaseDeDonneeSerie SYSTEM "BaseDeDonneeSerie.dtd" >
+<!DOCTYPE BaseDeDonneeSerie SYSTEM "BaseDeDonneeSerie.dtd">
 <BaseDeDonneeSerie>
   <Serie name="Malcom" id="1" lang="fr" folder="/home/florian/Serie/Malcom">
-	<Saison numberS="1" name="Saison 1">
-		<Episode numberE ="1">Je ne suis pas un monstre</Episode>
-		<Episode numberE ="2">Alerte rouge</Episode>
-		<Episode numberE ="3">Seuls a la maison</Episode>
-		<Episode numberE ="4">Honte</Episode>
-		<Episode numberE ="5">Changement de famille</Episode>
-		<Episode numberE ="6">Poquito Cabeza</Episode>
-		<Episode numberE ="7">La petite évasion</Episode>
-		<Episode numberE ="8">Panique au pique-nique</Episode>
-		<Episode numberE ="9">Ma mère, ce héros</Episode>
-		<Episode numberE ="10">À fond la caisse</Episode>
-		<Episode numberE ="11">Les funérailles</Episode>
-	</Saison>
-	<Saison numberS="2" name="Saison 2">
-		<Episode numberE ="1">Embouteillage</Episode>
-		<Episode numberE ="2">Il n'y a pas d'heure pour Halloween</Episode>
-		<Episode numberE ="3">Joyeux anniversaire Loïs</Episode>
-		<Episode numberE ="4">Dîner en ville</Episode>
-		<Episode numberE ="5">Faites vos jeux</Episode>
-		<Episode numberE ="6">Le congrès</Episode>
-		<Episode numberE ="7">Attaque à main armée</Episode>
-		<Episode numberE ="8">Thérapie</Episode>
-		<Episode numberE ="9">Malcolm brûle les planches</Episode>
-		<Episode numberE ="10">Le grand méchant Reese</Episode>
-		<Episode numberE ="11">La vieille dame</Episode>
-	</Saison>
-	<Saison numberS="3" name="Saison 3">
-		<Episode numberE ="1">Tout le monde sur le pont</Episode>
-		<Episode numberE ="2">Émancipation</Episode>
-		<Episode numberE ="3">Feux d'artifice</Episode>
-		<Episode numberE ="4">La petite amie</Episode>
-		<Episode numberE ="5">Bonnes œuvres</Episode>
-		<Episode numberE ="6">Sueurs froides</Episode>
-		<Episode numberE ="7">Chantage de Noël</Episode>
-		<Episode numberE ="8">Poker</Episode>
-		<Episode numberE ="9">Le poisson rouge</Episode>
-		<Episode numberE ="10">Sexy Loïs!</Episode>
-		<Episode numberE ="11">Pique-nique fatal</Episode>
-	</Saison>
+    <Saison numberS="1" name="Saison 1">
+      <Episode numberE="1">Je ne suis pas un monstre</Episode>
+      <Episode numberE="2">Alerte rouge</Episode>
+      <Episode numberE="3">Seuls a la maison</Episode>
+      <Episode numberE="4">Honte</Episode>
+      <Episode numberE="5">Changement de famille</Episode>
+      <Episode numberE="6">Poquito Cabeza</Episode>
+      <Episode numberE="7">La petite évasion</Episode>
+      <Episode numberE="8">Panique au pique-nique</Episode>
+      <Episode numberE="9">Ma mère, ce héros</Episode>
+      <Episode numberE="10">À fond la caisse</Episode>
+      <Episode numberE="11">Les funérailles</Episode>
+    </Saison>
+    <Saison numberS="2" name="Saison 2">
+      <Episode numberE="1">Embouteillage</Episode>
+      <Episode numberE="2">Il n'y a pas d'heure pour Halloween</Episode>
+      <Episode numberE="3">Joyeux anniversaire Loïs</Episode>
+      <Episode numberE="4">Dîner en ville</Episode>
+      <Episode numberE="5">Faites vos jeux</Episode>
+      <Episode numberE="6">Le congrès</Episode>
+      <Episode numberE="7">Attaque à main armée</Episode>
+      <Episode numberE="8">Thérapie</Episode>
+      <Episode numberE="9">Malcolm brûle les planches</Episode>
+      <Episode numberE="10">Le grand méchant Reese</Episode>
+      <Episode numberE="11">La vieille dame</Episode>
+    </Saison>
+    <Saison numberS="3" name="Saison 3">
+      <Episode numberE="1">Tout le monde sur le pont</Episode>
+      <Episode numberE="2">Émancipation</Episode>
+      <Episode numberE="3">Feux d'artifice</Episode>
+      <Episode numberE="4">La petite amie</Episode>
+      <Episode numberE="5">Bonnes œuvres</Episode>
+      <Episode numberE="6">Sueurs froides</Episode>
+      <Episode numberE="7">Chantage de Noël</Episode>
+      <Episode numberE="8">Poker</Episode>
+      <Episode numberE="9">Le poisson rouge</Episode>
+      <Episode numberE="10">Sexy Loïs!</Episode>
+      <Episode numberE="11">Pique-nique fatal</Episode>
+    </Saison>
   </Serie>
-  <Serie name="NCIS LA" id="2" lang="fr" folder="/home/florian/Serie/NCIS LA">
-  </Serie>
-  <Serie name="NCIS" id="3" lang="fr" folder="/home/florian/Serie/NCIS">
-  </Serie>
-  <Serie name="Hawaii 5-0" id="4" lang="fr" folder="/home/florian/Serie/Hawaii 5-0">
-  </Serie>
-  <Serie name="Dr House" id="5" lang="fr" folder="/home/florian/Serie/Dr House">
-  </Serie>
-  <Serie name="Homeland" id="6" lang="fr" folder="/home/florian/Serie/Homeland">
-  </Serie>
-  <Serie name="Ma famille d'abord" id="7" lang="fr" folder="/home/florian/Serie/Ma famille d'abord">
-  </Serie>
-  <Serie name="How I Met Your Mother" id="8" lang="fr" folder="/home/florian/Serie/How I Met Your Mother">
-  </Serie>
-  <Serie name= "The Big Bang Theory" id="9" lang="fr" folder="/home/florian/Serie/The Big Bang Theory">
-  </Serie>
-  <Serie name="Dexter" lang="fr" id="10" folder="/home/florian/Serie/Dexter">
-  </Serie>
-  <Serie name="Person of Interest" id="11" lang="fr" folder="/home/florian/Serie/Person of Interest">
-  </Serie>
-  <Serie name="90210" lang="fr" id="12" folder="/home/florian/Serie/90210">
+  <Serie name="NCIS LA" id="2" lang="fr" folder="/home/florian/Serie/NCIS LA" />
+  <Serie name="NCIS" id="3" lang="fr" folder="/home/florian/Serie/NCIS" />
+  <Serie name="Hawaii 5-0" id="4" lang="fr" folder="/home/florian/Serie/Hawaii 5-0" />
+  <Serie name="Dr House" id="5" lang="fr" folder="/home/florian/Serie/Dr House" />
+  <Serie name="Homeland" id="6" lang="fr" folder="/home/florian/Serie/Homeland" />
+  <Serie name="Ma famille d'abord" id="7" lang="fr" folder="/home/florian/Serie/Ma famille d'abord" />
+  <Serie name="How I Met Your Mother" id="8" lang="fr" folder="/home/florian/Serie/How I Met Your Mother" />
+  <Serie name="The Big Bang Theory" id="9" lang="fr" folder="/home/florian/Serie/The Big Bang Theory" />
+  <Serie name="Dexter" lang="fr" id="10" folder="/home/florian/Serie/Dexter" />
+  <Serie name="Person of Interest" id="11" lang="fr" folder="/home/florian/Serie/Person of Interest" />
+  <Serie name="90210" lang="fr" id="12" folder="/home/florian/Serie/90210" />
+  <Serie name="Flo à Miami" id="120" lang="fr" folder="/home/kai">
+    <Season numbers="1" name="Saison 1">
+      <Episode numberE="1">Flo envoi du steak</Episode>
+      <Episode numberE="2">Flo envoi du lourd</Episode>
+    </Season>
+    <Season numbers="2" name="Saison 2">
+      <Episode numberE="1">Flo envoi du paté</Episode>
+      <Episode numberE="2">Flo est un ouf</Episode>
+    </Season>
   </Serie>
 </BaseDeDonneeSerie>
