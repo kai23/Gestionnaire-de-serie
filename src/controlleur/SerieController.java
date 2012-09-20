@@ -14,7 +14,9 @@ import java.util.Scanner;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.Season;
-import model.Serie;
+	import model.Serie;
+import model.MaCollection;
+	
 import com.moviejukebox.thetvdb.TheTVDB;
 import com.moviejukebox.thetvdb.model.Episode;
 import com.moviejukebox.thetvdb.model.Series;
@@ -25,17 +27,19 @@ public class SerieController {
 	ArrayList<File> listeFichier = new ArrayList<>();
 	UtilitaireSerie utilitaireSerie = new UtilitaireSerie();
 	String apiKey = "6FB2F69F85316497";
+		MaCollection series;
 	Series serie;
-	ArrayList<Serie> maCollection = null;
-	
+
 	//Constructeur
-	
-	
+	public SerieController() {
+		series = new MaCollection();
+	}
+
 	/**
 	 * Chargement des series
 	 */
 	public void loadSeries (String url){
-		maCollection = Serie.getAllSeries(url);
+		series.loadSeries(url);
 	}
 
 	/**
@@ -78,7 +82,7 @@ public class SerieController {
 
 	public ArrayList<String> getAllSerieName() {
 		ArrayList<String> listeNomSerie = new ArrayList<String>();
-		for (Serie serie : maCollection) {
+			for (Serie serie : series.getSeries()) {
 			listeNomSerie.add(serie.getName());			
 		}
 		return listeNomSerie;
@@ -343,7 +347,7 @@ public class SerieController {
 		return serieRecherchee;
 	}
 	public Serie getSerieByName(String name) {
-		for (Serie serie : maCollection) {
+		for (Serie serie : series.getSeries()) {
 			if (serie.getName().equals(name)) {
 				return serie;
 			}
@@ -356,11 +360,8 @@ public class SerieController {
 	 * @param serie2
 	 * @return
 	 */
-	public boolean storeSerieXML(Serie serie) {
-		if (serie.storeSerie()) {
-			return true;
-		}
-		else return false;
+	public void storeSerieXML() {
+		series.storeSeries("BaseDeDonneeSerie.xml");
 	}
 	
 	/**
