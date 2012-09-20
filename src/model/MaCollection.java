@@ -119,7 +119,6 @@ public class MaCollection {
 				serie.addSeason(season);
 			}
 			series.add(serie);
-			System.out.println(serie);
 			// series.add(serieCourant.getAttributeValue("name"));
 
 		}
