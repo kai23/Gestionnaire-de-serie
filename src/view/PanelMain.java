@@ -108,18 +108,21 @@ public class PanelMain extends JPanel implements ActionListener {
 			JList listEpisodes = new JList(listModel);*/
 			
 			//Composition de la table
-			String[] columnNames = {"N°", "Title", "Length", "Seen"};
+			String[] columnNames = {"N°", "Title"};//, "Length", "Seen"};
 			Object[][] data = new Object[season.getAllEpisodes().size()][2];
 			//Pour chaque episode
 			int i = 0; 
 			for(Episode episode : season.getAllEpisodes()){
 				data[i][0] = episode.getNum();
 				data[i][1] = episode.getName();
+				System.out.println((String)data[i][1]);
 			//	data[i][2] = episodes.getLength();
 			//	data[i][3] = episodes.isWatched();				
 				i++;
 			}
-			wSeasons.add(new SeasonField(seasonLabel, new JTable(data, columnNames)));
+			JTable table = new JTable(data, columnNames);
+			panelSeason.add(table);
+			wSeasons.add(new SeasonField(seasonLabel, table));
 		}
 	
 		this.updateUI();
@@ -133,7 +136,6 @@ public class PanelMain extends JPanel implements ActionListener {
 		for (SeasonField season : wSeasons) {
 			if (e.getSource() == season.title){
 				season.episodes.setVisible(!season.episodes.isVisible());
-				System.out.println(season.episodes);
 			}
 		}
 	}
