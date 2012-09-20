@@ -1,5 +1,10 @@
 package view;
 
+import javax.swing.JPopupMenu;
+
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -43,7 +48,6 @@ public class PanelSerie extends JPanel implements ListSelectionListener, MouseLi
 		
 		//Ajout des components
 		add(listSerie);
-		
 	}
 
 	@Override
@@ -59,7 +63,10 @@ public class PanelSerie extends JPanel implements ListSelectionListener, MouseLi
 	public void mousePressed(MouseEvent e){
         if ( SwingUtilities.isRightMouseButton(e) )
         {
-            System.out.println("mouse pressed");
+			JPopupMenu menu = new JPopupMenu();
+			menu.add(new JMenuItem("Supprimer"));
+			menu.show(e.getComponent(),
+					  e.getX(), e.getY());
         }
     }
  

@@ -52,6 +52,7 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		serie.setName("Flo à Miami");
 		serie.setSeasons(saisons);
 		serie.setFolder("/home/kai");
+		
 		ctrl.storeSerieXML();
 
 
