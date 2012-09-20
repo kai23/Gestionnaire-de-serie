@@ -37,7 +37,7 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 	public Window() {
 		super("Ma fenêtre");
 		ctrl = new SerieController();
-		ctrl.loadSeries("/home/cactus/INGESUP/Java/Gestionnaire-de-serie/BaseDeDonneeSerie.xml");
+		ctrl.loadSeries("BaseDeDonneeSerie.xml");
 		/*Mise en page de la fenetre*/
 		setLayout(new BorderLayout());
 		Container pane = getContentPane();
