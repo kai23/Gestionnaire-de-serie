@@ -29,6 +29,8 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 	private JButton boutonAjout;
 	private JButton boutonParam;
 	private JTextField boxSearch;
+	private PanelSerie panelSeries;
+	private PanelMain infoSerie;
 	private SerieController ctrl;
 	
 	/**
@@ -80,9 +82,9 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		boxSearch.addKeyListener(this);
 
 		/* Panel de droite et de gauche */
-		PanelMain infoSerie = new PanelMain(ctrl);
+		infoSerie = new PanelMain(ctrl);
 		pane.add(toolbar, BorderLayout.PAGE_START);
-		PanelSerie panelSeries = new PanelSerie(infoSerie, ctrl);
+		panelSeries = new PanelSerie(infoSerie, ctrl);
 		pane.add(panelSeries, BorderLayout.LINE_START);
 		pane.add(infoSerie, BorderLayout.CENTER);
 
@@ -118,7 +120,8 @@ public class Window extends JFrame implements ActionListener, KeyListener{
 		{
 			//Valeur sur laquelle il faut executer la recherche.
 			String saisie = new String(boxSearch.getText());
-			JOptionPane.showMessageDialog(this, saisie, saisie, JOptionPane.WARNING_MESSAGE);
+			infoSerie.transferInfo(saisie);
+			infoSerie.updateView();
 		}
 	}
 
